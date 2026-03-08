@@ -1,0 +1,10 @@
+node_modules/
+dist/
+
+# Variables de entorno (proteger credenciales)
+.env
+.env.development
+.env.local
+.env.*.local
+!.env.example
+!.env.production
