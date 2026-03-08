@@ -486,11 +486,11 @@ export const SetPriceModal = ({
 
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
-      'tomografia': 'bg-cyan-50 border-cyan-200',
-      'tomografia3D': 'bg-cyan-50 border-cyan-200',
+      'tomografia': 'bg-panocef-light border-panocef-secondary',
+      'tomografia3D': 'bg-panocef-light border-panocef-secondary',
       'intraoral': 'bg-pink-50 border-pink-200',
       'extraoral': 'bg-blue-50 border-blue-200',
-      'ortodoncias': 'bg-purple-50 border-purple-200',
+      'ortodoncias': 'bg-panocef-light border-panocef-secondary',
       'analisis': 'bg-green-50 border-green-200',
       'fotografias': 'bg-amber-50 border-amber-200',
       'general': 'bg-gray-50 border-gray-200'

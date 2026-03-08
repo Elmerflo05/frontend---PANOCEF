@@ -29,18 +29,17 @@ const LaboratoryLayout = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const location = useLocation();
 
-  // Colores dinámicos según el rol
-  const useCyanTheme = user?.role === 'imaging_technician' || user?.role === 'external_client';
+  // Colores PanoCef (navy blue)
   const colors = {
-    primary: useCyanTheme ? 'cyan-500' : 'purple-600',
-    primaryDark: useCyanTheme ? 'cyan-600' : 'indigo-700',
-    primaryLight: useCyanTheme ? 'cyan-50' : 'purple-50',
-    primaryText: useCyanTheme ? 'cyan-700' : 'purple-700',
-    primaryBg: useCyanTheme ? 'cyan-600' : 'purple-600',
-    gradientFrom: useCyanTheme ? 'from-cyan-500' : 'from-purple-600',
-    gradientTo: useCyanTheme ? 'to-teal-600' : 'to-indigo-700',
-    iconBg: useCyanTheme ? 'cyan-100' : 'purple-100',
-    iconText: useCyanTheme ? 'cyan-600' : 'purple-600'
+    primary: 'panocef-primary',
+    primaryDark: 'panocef-dark',
+    primaryLight: 'panocef-light',
+    primaryText: 'panocef-primary',
+    primaryBg: 'panocef-primary',
+    gradientFrom: 'from-panocef-primary',
+    gradientTo: 'to-panocef-accent',
+    iconBg: 'panocef-light',
+    iconText: 'panocef-primary'
   };
 
   const menuItems = [
@@ -101,18 +100,18 @@ const LaboratoryLayout = () => {
                     flex items-center gap-3 px-3 py-2.5 rounded-lg
                     transition-all duration-200 group relative
                     ${isActive
-                      ? (useCyanTheme ? 'bg-cyan-50 text-cyan-700 font-semibold' : 'bg-purple-50 text-purple-700 font-semibold')
+                      ? ('bg-panocef-light text-panocef-primary font-semibold')
                       : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
                     }
                   `}
                 >
                   {/* Active Indicator */}
                   {isActive && (
-                    <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-full ${useCyanTheme ? 'bg-cyan-600' : 'bg-purple-600'}`} />
+                    <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-full bg-panocef-primary`} />
                   )}
 
                   <Icon className={`w-5 h-5 flex-shrink-0 ${
-                    isActive ? (useCyanTheme ? 'text-cyan-600' : 'text-purple-600') : 'text-gray-500 group-hover:text-gray-700'
+                    isActive ? 'text-panocef-primary' : 'text-gray-500 group-hover:text-gray-700'
                   }`} />
                   <span className="text-sm truncate">{item.label}</span>
                 </Link>
@@ -193,7 +192,7 @@ const LaboratoryLayout = () => {
                         {user?.profile.firstName} {user?.profile.lastName}
                       </p>
                       <p className="text-xs text-gray-500">{user?.email}</p>
-                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium mt-1 capitalize ${useCyanTheme ? 'bg-cyan-100 text-cyan-700' : 'bg-purple-100 text-purple-700'}`}>
+                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium mt-1 capitalize bg-panocef-light text-panocef-primary`}>
                         {user?.role}
                       </span>
                     </div>

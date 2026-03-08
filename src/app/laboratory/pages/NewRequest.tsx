@@ -1079,7 +1079,7 @@ const NewRequestPage = () => {
   if (loadingPrices) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-panocef-primary"></div>
         <span className="ml-2 text-gray-600">Cargando precios...</span>
       </div>
     );
@@ -1102,8 +1102,8 @@ const NewRequestPage = () => {
               <ArrowLeft className="w-5 h-5" />
             </button>
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center">
-                <PlusCircle className="w-6 h-6 text-cyan-600" />
+              <div className="w-12 h-12 bg-panocef-light rounded-lg flex items-center justify-center">
+                <PlusCircle className="w-6 h-6 text-panocef-primary" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">Nueva Solicitud</h1>
@@ -1113,12 +1113,12 @@ const NewRequestPage = () => {
           </div>
 
           {/* Precio calculado */}
-          <div className="bg-cyan-50 rounded-xl p-4 border border-cyan-200">
+          <div className="bg-panocef-light rounded-xl p-4 border border-panocef-secondary">
             <div className="flex items-center gap-3">
-              <Calculator className="w-6 h-6 text-cyan-600" />
+              <Calculator className="w-6 h-6 text-panocef-primary" />
               <div>
-                <p className="text-sm text-cyan-700 font-medium">Precio Estimado</p>
-                <p className="text-2xl font-bold text-cyan-900">
+                <p className="text-sm text-panocef-primary font-medium">Precio Estimado</p>
+                <p className="text-2xl font-bold text-panocef-dark">
                   S/ {calculatedPrice.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </p>
               </div>
@@ -1146,8 +1146,8 @@ const NewRequestPage = () => {
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center">
-              <User className="w-5 h-5 text-cyan-600" />
+            <div className="w-10 h-10 bg-panocef-light rounded-lg flex items-center justify-center">
+              <User className="w-5 h-5 text-panocef-primary" />
             </div>
             <div>
               <h2 className="text-lg font-bold text-gray-900">Datos del Paciente</h2>
@@ -1184,14 +1184,14 @@ const NewRequestPage = () => {
                 type="text"
                 value={patientData.dni}
                 onChange={(e) => handlePatientChange('dni', e.target.value)}
-                className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                 placeholder="8 dígitos"
                 maxLength={8}
                 inputMode="numeric"
               />
               <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                 {searchingDni ? (
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-cyan-600"></div>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-panocef-primary"></div>
                 ) : (
                   <Search className="w-4 h-4 text-gray-400" />
                 )}
@@ -1217,7 +1217,7 @@ const NewRequestPage = () => {
               className={`w-full px-3 py-2 border rounded-lg ${
                 isMyDentPatient === true
                   ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed'
-                  : 'border-gray-300 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500'
+                  : 'border-gray-300 focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary'
               }`}
               placeholder="Nombres del paciente"
             />
@@ -1236,7 +1236,7 @@ const NewRequestPage = () => {
               className={`w-full px-3 py-2 border rounded-lg ${
                 isMyDentPatient === true
                   ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed'
-                  : 'border-gray-300 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500'
+                  : 'border-gray-300 focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary'
               }`}
               placeholder="Apellidos del paciente"
             />
@@ -1255,7 +1255,7 @@ const NewRequestPage = () => {
               className={`w-full px-3 py-2 border rounded-lg ${
                 isMyDentPatient === true
                   ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed'
-                  : 'border-gray-300 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500'
+                  : 'border-gray-300 focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary'
               }`}
               placeholder="Edad"
               maxLength={3}
@@ -1275,7 +1275,7 @@ const NewRequestPage = () => {
               className={`w-full px-3 py-2 border rounded-lg ${
                 isMyDentPatient === true
                   ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed'
-                  : 'border-gray-300 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500'
+                  : 'border-gray-300 focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary'
               }`}
               placeholder="999 999 999"
               maxLength={11}
@@ -1296,7 +1296,7 @@ const NewRequestPage = () => {
               className={`w-full px-3 py-2 border rounded-lg ${
                 isMyDentPatient === true
                   ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed'
-                  : 'border-gray-300 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500'
+                  : 'border-gray-300 focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary'
               }`}
               placeholder="Correo electrónico"
             />
@@ -1318,8 +1318,8 @@ const NewRequestPage = () => {
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center">
-              <Stethoscope className="w-5 h-5 text-teal-600" />
+            <div className="w-10 h-10 bg-panocef-light rounded-lg flex items-center justify-center">
+              <Stethoscope className="w-5 h-5 text-panocef-primary" />
             </div>
             <div>
               <h2 className="text-lg font-bold text-gray-900">Datos del Odontólogo</h2>
@@ -1333,7 +1333,7 @@ const NewRequestPage = () => {
 
           {/* Badge de estado del doctor */}
           {isExternalClient ? (
-            <span className="px-3 py-1 bg-teal-100 text-teal-700 text-xs font-medium rounded-full">
+            <span className="px-3 py-1 bg-panocef-light text-panocef-primary text-xs font-medium rounded-full">
               Datos de tu perfil
             </span>
           ) : isMyDentDoctor === true ? (
@@ -1367,14 +1367,14 @@ const NewRequestPage = () => {
                 className={`w-full px-3 py-2 pr-10 border rounded-lg ${
                   isExternalClient
                     ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed'
-                    : 'border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-teal-500'
+                    : 'border-gray-300 focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary'
                 }`}
                 placeholder="Ej: 12345"
               />
               {!isExternalClient && (
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                   {searchingCop ? (
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-teal-600"></div>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-panocef-primary"></div>
                   ) : (
                     <Search className="w-4 h-4 text-gray-400" />
                   )}
@@ -1401,7 +1401,7 @@ const NewRequestPage = () => {
               className={`w-full px-3 py-2 border rounded-lg ${
                 isExternalClient || isMyDentDoctor === true
                   ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed'
-                  : 'border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-teal-500'
+                  : 'border-gray-300 focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary'
               }`}
               placeholder="Nombres del doctor"
             />
@@ -1420,7 +1420,7 @@ const NewRequestPage = () => {
               className={`w-full px-3 py-2 border rounded-lg ${
                 isExternalClient || isMyDentDoctor === true
                   ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed'
-                  : 'border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-teal-500'
+                  : 'border-gray-300 focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary'
               }`}
               placeholder="Apellidos del doctor"
             />
@@ -1439,7 +1439,7 @@ const NewRequestPage = () => {
               className={`w-full px-3 py-2 border rounded-lg ${
                 isExternalClient || isMyDentDoctor === true
                   ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed'
-                  : 'border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-teal-500'
+                  : 'border-gray-300 focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary'
               }`}
               placeholder="Especialidad médica"
             />
@@ -1458,7 +1458,7 @@ const NewRequestPage = () => {
               className={`w-full px-3 py-2 border rounded-lg ${
                 isExternalClient || isMyDentDoctor === true
                   ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed'
-                  : 'border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-teal-500'
+                  : 'border-gray-300 focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary'
               }`}
               placeholder="999 999 999"
               maxLength={11}
@@ -1479,7 +1479,7 @@ const NewRequestPage = () => {
               className={`w-full px-3 py-2 border rounded-lg ${
                 isExternalClient || isMyDentDoctor === true
                   ? 'bg-gray-50 border-gray-200 text-gray-700 cursor-not-allowed'
-                  : 'border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-teal-500'
+                  : 'border-gray-300 focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary'
               }`}
               placeholder="Correo electrónico"
             />
@@ -1500,8 +1500,8 @@ const NewRequestPage = () => {
       {/* Formulario de Estudios */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center">
-            <FileImage className="w-5 h-5 text-cyan-600" />
+          <div className="w-10 h-10 bg-panocef-light rounded-lg flex items-center justify-center">
+            <FileImage className="w-5 h-5 text-panocef-primary" />
           </div>
           <div>
             <h2 className="text-lg font-bold text-gray-900">Estudios Solicitados</h2>
@@ -1513,7 +1513,7 @@ const NewRequestPage = () => {
           mode="edit"
           userRole="imaging_technician"
           showPrices={true}
-          colorTheme="cyan"
+          colorTheme="panocef"
           tomografiaData={tomografiaData}
           radiografiasData={radiografiasData}
           tomografiaPricing={tomografiaPricing}
@@ -1546,10 +1546,10 @@ const NewRequestPage = () => {
               >
                 <div className="flex items-center gap-3">
                   <span className={`text-xs px-2 py-1 rounded-full font-medium ${
-                    item.category === 'tomografia3D' ? 'bg-cyan-100 text-cyan-700' :
+                    item.category === 'tomografia3D' ? 'bg-panocef-light text-panocef-primary' :
                     item.category === 'intraoral' ? 'bg-blue-100 text-blue-700' :
-                    item.category === 'extraoral' ? 'bg-purple-100 text-purple-700' :
-                    item.category === 'ortodoncias' ? 'bg-teal-100 text-teal-700' :
+                    item.category === 'extraoral' ? 'bg-panocef-light text-panocef-primary' :
+                    item.category === 'ortodoncias' ? 'bg-panocef-light text-panocef-primary' :
                     'bg-orange-100 text-orange-700'
                   }`}>
                     {item.category === 'tomografia3D' ? 'Tomografía' :
@@ -1571,7 +1571,7 @@ const NewRequestPage = () => {
 
             <div className="border-t border-gray-200 mt-4 pt-4 flex items-center justify-between">
               <span className="text-lg font-bold text-gray-900">Total</span>
-              <span className="text-2xl font-bold text-cyan-600">
+              <span className="text-2xl font-bold text-panocef-primary">
                 S/ {calculatedPrice.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
             </div>
@@ -1592,7 +1592,7 @@ const NewRequestPage = () => {
           <button
             onClick={handleSave}
             disabled={loading || priceBreakdown.length === 0}
-            className="px-6 py-2.5 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            className="px-6 py-2.5 bg-panocef-primary text-white rounded-lg hover:bg-panocef-dark transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
             {loading ? (
               <>

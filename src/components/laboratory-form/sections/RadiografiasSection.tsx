@@ -171,7 +171,7 @@ export const RadiografiasSection = ({
         disabled={isReadOnly}
         showPrice={showPrices && !!priceField}
         price={priceField && pricing ? pricing[priceField] : undefined}
-        colorTheme={colorTheme === 'teal' || colorTheme === 'indigo' ? 'cyan' : colorTheme}
+        colorTheme="panocef"
       >
         {children}
       </CheckboxItem>
@@ -196,18 +196,18 @@ export const RadiografiasSection = ({
     const getContainerStyles = () => {
       if (isReadOnly) {
         if (isChecked) {
-          return 'border-2 border-teal-400 bg-teal-50 shadow-sm';
+          return 'border-2 border-panocef-primary bg-panocef-light shadow-sm';
         } else {
           return 'border border-gray-200 bg-gray-50/50 opacity-40';
         }
       }
-      return `border border-gray-200 ${isChecked ? 'bg-teal-50' : 'bg-white hover:bg-gray-50'}`;
+      return `border border-gray-200 ${isChecked ? 'bg-panocef-light' : 'bg-white hover:bg-gray-50'}`;
     };
 
     const getLabelStyles = () => {
       if (isReadOnly) {
         if (isChecked) {
-          return 'font-semibold text-teal-800';
+          return 'font-semibold text-panocef-dark';
         } else {
           return 'font-normal text-gray-400';
         }
@@ -231,7 +231,7 @@ export const RadiografiasSection = ({
             {isReadOnly ? (
               // En modo lectura, mostrar icono visual en lugar de checkbox
               isChecked ? (
-                <span className="w-5 h-5 rounded bg-teal-500 flex items-center justify-center">
+                <span className="w-5 h-5 rounded bg-panocef-light0 flex items-center justify-center">
                   <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                 </span>
               ) : (
@@ -248,7 +248,7 @@ export const RadiografiasSection = ({
                     toggleSection(sectionKey);
                   }
                 }}
-                className="w-4 h-4 text-teal-600 border-gray-300 rounded focus:ring-teal-500"
+                className="w-4 h-4 text-panocef-primary border-gray-300 rounded focus:ring-panocef-primary"
               />
             )}
             <span className={getLabelStyles()}>{label}</span>
@@ -285,11 +285,11 @@ export const RadiografiasSection = ({
   // ============================================================================
   if (isPricingMode) {
     return (
-      <div className="bg-teal-50 border border-teal-200 p-6 mb-6 rounded-xl">
-        <div className="flex items-center justify-between mb-6 pb-3 border-b-2 border-teal-400">
+      <div className="bg-panocef-light border border-panocef-secondary p-6 mb-6 rounded-xl">
+        <div className="flex items-center justify-between mb-6 pb-3 border-b-2 border-panocef-primary">
           <div className="flex items-center gap-3">
-            <FileImage className="w-6 h-6 text-teal-700" />
-            <h2 className="text-lg font-bold text-teal-900">Paso 2: Radiografías</h2>
+            <FileImage className="w-6 h-6 text-panocef-primary" />
+            <h2 className="text-lg font-bold text-panocef-dark">Paso 2: Radiografías</h2>
             {isReadOnly && (
               <span className="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded">
                 Solo lectura
@@ -303,7 +303,7 @@ export const RadiografiasSection = ({
                 onSave();
               }}
               disabled={loading}
-              className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
+              className="flex items-center gap-2 px-4 py-2 bg-panocef-primary text-white rounded hover:bg-panocef-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
             >
               <Save className="w-4 h-4" />
               {loading ? 'Guardando...' : 'Guardar Configuración'}
@@ -322,8 +322,8 @@ export const RadiografiasSection = ({
           </div>
 
           {/* Bitewing */}
-          <div className="bg-indigo-50 border border-indigo-200 p-4 rounded">
-            <SubsectionTitle title="BITEWING" colorTheme="indigo" />
+          <div className="bg-panocef-light border border-panocef-secondary p-4 rounded">
+            <SubsectionTitle title="BITEWING" colorTheme="panocef" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {renderPriceInput('Bitewing Molares (por lado)', 'bitewingMolares')}
               {renderPriceInput('Bitewing Premolares (por lado)', 'bitewingPremolares')}
@@ -331,8 +331,8 @@ export const RadiografiasSection = ({
           </div>
 
           {/* Oclusal */}
-          <div className="bg-purple-50 border border-purple-200 p-4 rounded">
-            <SubsectionTitle title="OCLUSAL" colorTheme="purple" />
+          <div className="bg-panocef-light border border-panocef-secondary p-4 rounded">
+            <SubsectionTitle title="OCLUSAL" colorTheme="panocef" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {renderPriceInput('Oclusal Superiores', 'oclusalSuperiores')}
               {renderPriceInput('Oclusal Inferiores', 'oclusalInferiores')}
@@ -392,8 +392,8 @@ export const RadiografiasSection = ({
           </div>
 
           {/* Análisis Cefalométricos */}
-          <div className="bg-teal-50 border border-teal-200 p-4 rounded">
-            <SubsectionTitle title="ANÁLISIS CEFALOMÉTRICOS" colorTheme="teal" />
+          <div className="bg-panocef-light border border-panocef-secondary p-4 rounded">
+            <SubsectionTitle title="ANÁLISIS CEFALOMÉTRICOS" colorTheme="panocef" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
               {renderPriceInput('Ricketts', 'ricketts')}
               {renderPriceInput('Schwartz', 'schwartz')}
@@ -418,15 +418,15 @@ export const RadiografiasSection = ({
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
       {/* Header */}
-      <div className="bg-teal-600 p-5 text-white flex items-center justify-between">
+      <div className="bg-panocef-primary p-5 text-white flex items-center justify-between">
         <div className="flex items-center gap-3">
           <FileImage className="w-6 h-6" />
           <div>
             <h2 className="text-xl font-bold">Paso 2: Radiografías</h2>
-            <p className="text-sm text-teal-100">PanoCef - Centro de Imágenes Dentomaxilofacial</p>
+            <p className="text-sm text-panocef-light">PanoCef - Centro de Imágenes Dentomaxilofacial</p>
           </div>
         </div>
-        <div className="text-sm text-teal-100">Paso 2 de 2</div>
+        <div className="text-sm text-panocef-light">Paso 2 de 2</div>
       </div>
 
       <div className="p-6 space-y-6">
@@ -468,7 +468,7 @@ export const RadiografiasSection = ({
                     disabled={isReadOnly}
                     showPrice={showPrices}
                     price={pricing?.bitewingMolares}
-                    colorTheme="cyan"
+                    colorTheme="panocef"
                   />
                   <CheckboxItem
                     label="I"
@@ -477,7 +477,7 @@ export const RadiografiasSection = ({
                     disabled={isReadOnly}
                     showPrice={showPrices}
                     price={pricing?.bitewingMolares}
-                    colorTheme="cyan"
+                    colorTheme="panocef"
                   />
                 </div>
               </div>
@@ -491,7 +491,7 @@ export const RadiografiasSection = ({
                     disabled={isReadOnly}
                     showPrice={showPrices}
                     price={pricing?.bitewingPremolares}
-                    colorTheme="cyan"
+                    colorTheme="panocef"
                   />
                   <CheckboxItem
                     label="I"
@@ -500,7 +500,7 @@ export const RadiografiasSection = ({
                     disabled={isReadOnly}
                     showPrice={showPrices}
                     price={pricing?.bitewingPremolares}
-                    colorTheme="cyan"
+                    colorTheme="panocef"
                   />
                 </div>
               </div>
@@ -535,7 +535,7 @@ export const RadiografiasSection = ({
                   disabled={isReadOnly}
                   showPrice={showPrices}
                   price={pricing?.fotografiaIntraoral}
-                  colorTheme="cyan"
+                  colorTheme="panocef"
                 />
                 <CheckboxItem
                   label="Fotografía Extraoral"
@@ -544,7 +544,7 @@ export const RadiografiasSection = ({
                   disabled={isReadOnly}
                   showPrice={showPrices}
                   price={pricing?.fotografiaExtraoral}
-                  colorTheme="cyan"
+                  colorTheme="panocef"
                 />
               </div>
             )}
@@ -643,14 +643,14 @@ export const RadiografiasSection = ({
                   checked={formData?.carpalFishman || false}
                   onChange={(val) => onFormChange?.('carpalFishman', val)}
                   disabled={isReadOnly}
-                  colorTheme="cyan"
+                  colorTheme="panocef"
                 />
                 <CheckboxItem
                   label="TTW2"
                   checked={formData?.carpalTtw2 || false}
                   onChange={(val) => onFormChange?.('carpalTtw2', val)}
                   disabled={isReadOnly}
-                  colorTheme="cyan"
+                  colorTheme="panocef"
                 />
               </div>,
               'carpal'
@@ -667,7 +667,7 @@ export const RadiografiasSection = ({
                   checked={formData?.posteriorAnteriorRicketts || false}
                   onChange={(val) => onFormChange?.('posteriorAnteriorRicketts', val)}
                   disabled={isReadOnly}
-                  colorTheme="cyan"
+                  colorTheme="panocef"
                 />
               </div>,
               'posteriorAnterior'
@@ -682,8 +682,8 @@ export const RadiografiasSection = ({
         {/* ================================================================== */}
         {/* SECCIÓN ASESORÍA ORTODONCIA */}
         {/* ================================================================== */}
-        <div className="bg-purple-50/50 rounded-lg p-5 border border-purple-200">
-          <SubsectionTitle title="ASESORÍA ORTODONCIA" colorTheme="purple" />
+        <div className="bg-panocef-light/50 rounded-lg p-5 border border-panocef-secondary">
+          <SubsectionTitle title="ASESORÍA ORTODONCIA" colorTheme="panocef" />
 
           {/* Tipo FÍSICO/DIGITAL */}
           <div className="mb-4 flex gap-3">
@@ -692,14 +692,14 @@ export const RadiografiasSection = ({
               const getButtonStyles = (isSelected: boolean) => {
                 if (isReadOnly) {
                   if (isSelected) {
-                    return 'bg-purple-500 text-white shadow-md border-2 border-purple-600';
+                    return 'bg-panocef-primary text-white shadow-md border-2 border-panocef-dark';
                   } else {
                     return 'bg-gray-100 border border-gray-200 text-gray-400 opacity-40';
                   }
                 }
                 return isSelected
-                  ? 'bg-purple-500 text-white shadow-md'
-                  : 'bg-white border-2 border-purple-300 text-purple-700 hover:bg-purple-50';
+                  ? 'bg-panocef-primary text-white shadow-md'
+                  : 'bg-white border-2 border-panocef-secondary text-panocef-primary hover:bg-panocef-light';
               };
               return (
                 <button
@@ -724,14 +724,14 @@ export const RadiografiasSection = ({
               const getButtonStyles = (isSelected: boolean) => {
                 if (isReadOnly) {
                   if (isSelected) {
-                    return 'bg-purple-500 text-white shadow-md border-2 border-purple-600';
+                    return 'bg-panocef-primary text-white shadow-md border-2 border-panocef-dark';
                   } else {
                     return 'bg-gray-100 border border-gray-200 text-gray-400 opacity-40';
                   }
                 }
                 return isSelected
-                  ? 'bg-purple-500 text-white shadow-md'
-                  : 'bg-white border-2 border-purple-300 text-purple-700 hover:bg-purple-50';
+                  ? 'bg-panocef-primary text-white shadow-md'
+                  : 'bg-white border-2 border-panocef-secondary text-panocef-primary hover:bg-panocef-light';
               };
               return (
                 <button
@@ -755,7 +755,7 @@ export const RadiografiasSection = ({
 
           {/* Paquetes Ortodoncia */}
           <div className="mb-6">
-            <h4 className="text-sm font-semibold text-purple-900 mb-3">Paquetes Ortodoncia</h4>
+            <h4 className="text-sm font-semibold text-panocef-dark mb-3">Paquetes Ortodoncia</h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Paquete 1 */}
               {(() => {
@@ -763,16 +763,16 @@ export const RadiografiasSection = ({
                 const getContainerStyles = () => {
                   if (isReadOnly) {
                     if (isSelected) {
-                      return 'border-2 border-purple-500 bg-purple-50 shadow-sm';
+                      return 'border-2 border-panocef-primary bg-panocef-light shadow-sm';
                     } else {
                       return 'border border-gray-200 bg-gray-50/50 opacity-40';
                     }
                   }
-                  return isSelected ? 'border-2 border-purple-500 bg-purple-50' : 'border-2 border-gray-200 bg-white';
+                  return isSelected ? 'border-2 border-panocef-primary bg-panocef-light' : 'border-2 border-gray-200 bg-white';
                 };
                 const getLabelStyles = () => {
                   if (isReadOnly) {
-                    return isSelected ? 'font-semibold text-purple-800' : 'font-normal text-gray-400';
+                    return isSelected ? 'font-semibold text-panocef-dark' : 'font-normal text-gray-400';
                   }
                   return 'font-semibold text-gray-800';
                 };
@@ -785,7 +785,7 @@ export const RadiografiasSection = ({
                     <label className={`flex items-center gap-2 ${isReadOnly ? '' : 'cursor-pointer'}`}>
                       {isReadOnly ? (
                         isSelected ? (
-                          <span className="w-5 h-5 rounded-full bg-purple-500 flex items-center justify-center">
+                          <span className="w-5 h-5 rounded-full bg-panocef-primary flex items-center justify-center">
                             <span className="w-2 h-2 rounded-full bg-white" />
                           </span>
                         ) : (
@@ -797,7 +797,7 @@ export const RadiografiasSection = ({
                           name="ortodonciaPaquete"
                           checked={isSelected}
                           onChange={() => onFormChange?.('ortodonciaPaquete', 1)}
-                          className="w-4 h-4 text-purple-600"
+                          className="w-4 h-4 text-panocef-primary"
                         />
                       )}
                       <span className={getLabelStyles()}>Paquete 1</span>
@@ -809,7 +809,7 @@ export const RadiografiasSection = ({
                       <p>• Análisis</p>
                     </div>
                     {showPrices && pricing && (
-                      <p className={`text-xs mt-2 ${isReadOnly && !isSelected ? 'text-gray-300' : 'text-purple-600'}`}>
+                      <p className={`text-xs mt-2 ${isReadOnly && !isSelected ? 'text-gray-300' : 'text-panocef-primary'}`}>
                         Con asesoría: S/{pricing.paq1ConAsesoria} | Sin: S/{pricing.paq1SinAsesoria}
                       </p>
                     )}
@@ -823,16 +823,16 @@ export const RadiografiasSection = ({
                 const getContainerStyles = () => {
                   if (isReadOnly) {
                     if (isSelected) {
-                      return 'border-2 border-purple-500 bg-purple-50 shadow-sm';
+                      return 'border-2 border-panocef-primary bg-panocef-light shadow-sm';
                     } else {
                       return 'border border-gray-200 bg-gray-50/50 opacity-40';
                     }
                   }
-                  return isSelected ? 'border-2 border-purple-500 bg-purple-50' : 'border-2 border-gray-200 bg-white';
+                  return isSelected ? 'border-2 border-panocef-primary bg-panocef-light' : 'border-2 border-gray-200 bg-white';
                 };
                 const getLabelStyles = () => {
                   if (isReadOnly) {
-                    return isSelected ? 'font-semibold text-purple-800' : 'font-normal text-gray-400';
+                    return isSelected ? 'font-semibold text-panocef-dark' : 'font-normal text-gray-400';
                   }
                   return 'font-semibold text-gray-800';
                 };
@@ -845,7 +845,7 @@ export const RadiografiasSection = ({
                     <label className={`flex items-center gap-2 ${isReadOnly ? '' : 'cursor-pointer'}`}>
                       {isReadOnly ? (
                         isSelected ? (
-                          <span className="w-5 h-5 rounded-full bg-purple-500 flex items-center justify-center">
+                          <span className="w-5 h-5 rounded-full bg-panocef-primary flex items-center justify-center">
                             <span className="w-2 h-2 rounded-full bg-white" />
                           </span>
                         ) : (
@@ -857,7 +857,7 @@ export const RadiografiasSection = ({
                           name="ortodonciaPaquete"
                           checked={isSelected}
                           onChange={() => onFormChange?.('ortodonciaPaquete', 2)}
-                          className="w-4 h-4 text-purple-600"
+                          className="w-4 h-4 text-panocef-primary"
                         />
                       )}
                       <span className={getLabelStyles()}>Paquete 2</span>
@@ -870,7 +870,7 @@ export const RadiografiasSection = ({
                       <p>• Fotografía 3D</p>
                     </div>
                     {showPrices && pricing && (
-                      <p className={`text-xs mt-2 ${isReadOnly && !isSelected ? 'text-gray-300' : 'text-purple-600'}`}>
+                      <p className={`text-xs mt-2 ${isReadOnly && !isSelected ? 'text-gray-300' : 'text-panocef-primary'}`}>
                         Con asesoría: S/{pricing.paq2ConAsesoria} | Sin: S/{pricing.paq2SinAsesoria}
                       </p>
                     )}
@@ -884,16 +884,16 @@ export const RadiografiasSection = ({
                 const getContainerStyles = () => {
                   if (isReadOnly) {
                     if (isSelected) {
-                      return 'border-2 border-purple-500 bg-purple-50 shadow-sm';
+                      return 'border-2 border-panocef-primary bg-panocef-light shadow-sm';
                     } else {
                       return 'border border-gray-200 bg-gray-50/50 opacity-40';
                     }
                   }
-                  return isSelected ? 'border-2 border-purple-500 bg-purple-50' : 'border-2 border-gray-200 bg-white';
+                  return isSelected ? 'border-2 border-panocef-primary bg-panocef-light' : 'border-2 border-gray-200 bg-white';
                 };
                 const getLabelStyles = () => {
                   if (isReadOnly) {
-                    return isSelected ? 'font-semibold text-purple-800' : 'font-normal text-gray-400';
+                    return isSelected ? 'font-semibold text-panocef-dark' : 'font-normal text-gray-400';
                   }
                   return 'font-semibold text-gray-800';
                 };
@@ -906,7 +906,7 @@ export const RadiografiasSection = ({
                     <label className={`flex items-center gap-2 ${isReadOnly ? '' : 'cursor-pointer'}`}>
                       {isReadOnly ? (
                         isSelected ? (
-                          <span className="w-5 h-5 rounded-full bg-purple-500 flex items-center justify-center">
+                          <span className="w-5 h-5 rounded-full bg-panocef-primary flex items-center justify-center">
                             <span className="w-2 h-2 rounded-full bg-white" />
                           </span>
                         ) : (
@@ -918,7 +918,7 @@ export const RadiografiasSection = ({
                           name="ortodonciaPaquete"
                           checked={isSelected}
                           onChange={() => onFormChange?.('ortodonciaPaquete', 3)}
-                          className="w-4 h-4 text-purple-600"
+                          className="w-4 h-4 text-panocef-primary"
                         />
                       )}
                       <span className={getLabelStyles()}>Paquete 3</span>
@@ -931,7 +931,7 @@ export const RadiografiasSection = ({
                       <p>• Escaneo Intraoral</p>
                     </div>
                     {showPrices && pricing && (
-                      <p className={`text-xs mt-2 ${isReadOnly && !isSelected ? 'text-gray-300' : 'text-purple-600'}`}>
+                      <p className={`text-xs mt-2 ${isReadOnly && !isSelected ? 'text-gray-300' : 'text-panocef-primary'}`}>
                         Con asesoría: S/{pricing.paq3ConAsesoria} | Sin: S/{pricing.paq3SinAsesoria}
                       </p>
                     )}
@@ -1020,7 +1020,7 @@ export const RadiografiasSection = ({
 
           {/* Servicios Adicionales */}
           <div>
-            <h4 className="text-sm font-semibold text-purple-900 mb-3">Servicios Adicionales</h4>
+            <h4 className="text-sm font-semibold text-panocef-dark mb-3">Servicios Adicionales</h4>
             <div className="space-y-3">
               {/* Alineadores Invisibles */}
               {renderExpandableCheckbox(
@@ -1033,14 +1033,14 @@ export const RadiografiasSection = ({
                     checked={formData?.alineadoresPlanificacion || false}
                     onChange={(val) => onFormChange?.('alineadoresPlanificacion', val)}
                     disabled={isReadOnly}
-                    colorTheme="purple"
+                    colorTheme="panocef"
                   />
                   <CheckboxItem
                     label="Impresión y papel+cera"
                     checked={formData?.alineadoresImpresion || false}
                     onChange={(val) => onFormChange?.('alineadoresImpresion', val)}
                     disabled={isReadOnly}
-                    colorTheme="purple"
+                    colorTheme="panocef"
                   />
                 </div>,
                 'alineadores'
@@ -1057,21 +1057,21 @@ export const RadiografiasSection = ({
                     checked={formData?.escaneoIntraoral || false}
                     onChange={(val) => onFormChange?.('escaneoIntraoral', val)}
                     disabled={isReadOnly}
-                    colorTheme="purple"
+                    colorTheme="panocef"
                   />
                   <CheckboxItem
                     label="Escaneo Intraoral con Zócalo"
                     checked={formData?.escaneoIntraoralZocalo || false}
                     onChange={(val) => onFormChange?.('escaneoIntraoralZocalo', val)}
                     disabled={isReadOnly}
-                    colorTheme="purple"
+                    colorTheme="panocef"
                   />
                   <CheckboxItem
                     label="Escaneo Intraoral sin informe"
                     checked={formData?.escaneoIntraoralInforme || false}
                     onChange={(val) => onFormChange?.('escaneoIntraoralInforme', val)}
                     disabled={isReadOnly}
-                    colorTheme="purple"
+                    colorTheme="panocef"
                   />
                 </div>,
                 'escaneoIntraoral'
@@ -1083,7 +1083,7 @@ export const RadiografiasSection = ({
         {/* ================================================================== */}
         {/* SECCIÓN MODELOS DE ESTUDIO 3D */}
         {/* ================================================================== */}
-        <div className="bg-teal-50/50 rounded-lg p-5 border border-teal-200">
+        <div className="bg-panocef-light/50 rounded-lg p-5 border border-panocef-secondary">
           {renderExpandableCheckbox(
             'MODELOS DE ESTUDIO 3D',
             'ortodonciaImpresion',
@@ -1094,21 +1094,21 @@ export const RadiografiasSection = ({
                 checked={formData?.modelosDigitalesConInforme || false}
                 onChange={(val) => onFormChange?.('modelosDigitalesConInforme', val)}
                 disabled={isReadOnly}
-                colorTheme="cyan"
+                colorTheme="panocef"
               />
               <CheckboxItem
                 label="Modelos Digitales sin informe"
                 checked={formData?.modelosDigitalesSinInforme || false}
                 onChange={(val) => onFormChange?.('modelosDigitalesSinInforme', val)}
                 disabled={isReadOnly}
-                colorTheme="cyan"
+                colorTheme="panocef"
               />
               <CheckboxItem
                 label="Impresión digital"
                 checked={formData?.modelosImpresionDigital || false}
                 onChange={(val) => onFormChange?.('modelosImpresionDigital', val)}
                 disabled={isReadOnly}
-                colorTheme="cyan"
+                colorTheme="panocef"
               />
             </div>,
             'modelosDigitales'
@@ -1118,8 +1118,8 @@ export const RadiografiasSection = ({
         {/* ================================================================== */}
         {/* SECCIÓN ANÁLISIS CEFALOMÉTRICOS */}
         {/* ================================================================== */}
-        <div className="bg-indigo-50/50 rounded-lg p-5 border border-indigo-200">
-          <SubsectionTitle title="ANÁLISIS CEFALOMÉTRICOS" colorTheme="indigo" />
+        <div className="bg-panocef-light/50 rounded-lg p-5 border border-panocef-secondary">
+          <SubsectionTitle title="ANÁLISIS CEFALOMÉTRICOS" colorTheme="panocef" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {renderCheckbox('Ricketts', 'analisisRicketts', 'ricketts')}
             {renderCheckbox('Schwartz', 'analisisSchwartz', 'schwartz')}
@@ -1141,7 +1141,7 @@ export const RadiografiasSection = ({
             <textarea
               value={formData?.analisisOtros || ''}
               onChange={(e) => onFormChange?.('analisisOtros', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary resize-none"
               rows={2}
               placeholder="Especifique otros análisis..."
               disabled={isReadOnly}
@@ -1155,7 +1155,7 @@ export const RadiografiasSection = ({
             <button
               onClick={onSave}
               disabled={loading}
-              className="flex items-center gap-2 px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors font-medium disabled:opacity-50"
+              className="flex items-center gap-2 px-6 py-3 bg-panocef-primary text-white rounded-lg hover:bg-panocef-dark transition-colors font-medium disabled:opacity-50"
             >
               <Save className="w-5 h-5" />
               {loading ? 'Guardando...' : 'Guardar Radiografías'}

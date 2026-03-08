@@ -1,7 +1,7 @@
 import { FileImage, FileText, Download, Plus, RefreshCw } from 'lucide-react';
 
 interface RequestsHeaderProps {
-  useCyanTheme: boolean;
+  useCyanTheme?: boolean;
   title?: string;
   subtitle?: string;
   onExportPDF: () => void;
@@ -11,7 +11,6 @@ interface RequestsHeaderProps {
 }
 
 export const RequestsHeader = ({
-  useCyanTheme,
   title = 'Solicitudes de Estudios de Imágenes',
   subtitle = 'Gestión de órdenes de estudios radiológicos',
   onExportPDF,
@@ -23,8 +22,8 @@ export const RequestsHeader = ({
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${useCyanTheme ? 'bg-cyan-100' : 'bg-purple-100'}`}>
-            <FileImage className={`w-6 h-6 ${useCyanTheme ? 'text-cyan-600' : 'text-purple-600'}`} />
+          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-panocef-light">
+            <FileImage className="w-6 h-6 text-panocef-primary" />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
@@ -61,7 +60,7 @@ export const RequestsHeader = ({
           </button>
           <button
             onClick={onRefresh}
-            className={`text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors ${useCyanTheme ? 'bg-cyan-600 hover:bg-cyan-700' : 'bg-purple-600 hover:bg-purple-700'}`}
+            className="text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors bg-panocef-primary hover:bg-panocef-dark"
           >
             <RefreshCw className="w-4 h-4" />
             Actualizar

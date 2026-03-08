@@ -70,8 +70,8 @@ export const RadiografiasFormStepUnified = ({
 
       {/* Resumen de precios (si hay items) */}
       {showPrices && priceBreakdown.length > 0 && (
-        <div className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-6 border-2 border-teal-200 shadow-lg">
-          <h3 className="text-lg font-bold text-teal-900 mb-4 flex items-center gap-2">
+        <div className="bg-gradient-to-br from-panocef-light to-blue-50 rounded-xl p-6 border-2 border-panocef-secondary shadow-lg">
+          <h3 className="text-lg font-bold text-panocef-dark mb-4 flex items-center gap-2">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
             </svg>
@@ -81,14 +81,14 @@ export const RadiografiasFormStepUnified = ({
           {/* Lista de items */}
           <div className="space-y-2 mb-4">
             {priceBreakdown.map((item, index) => (
-              <div key={index} className="flex justify-between items-center py-2 border-b border-teal-100">
+              <div key={index} className="flex justify-between items-center py-2 border-b border-panocef-light">
                 <span className="text-gray-700">
                   {item.itemName}
                   {item.quantity && item.quantity > 1 && (
                     <span className="text-xs text-gray-500 ml-1">x{item.quantity}</span>
                   )}
                 </span>
-                <span className="font-semibold text-teal-700">
+                <span className="font-semibold text-panocef-primary">
                   S/ {(item.subtotal || 0).toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
               </div>
@@ -96,9 +96,9 @@ export const RadiografiasFormStepUnified = ({
           </div>
 
           {/* Total */}
-          <div className="flex justify-between items-center pt-4 border-t-2 border-teal-300">
-            <span className="text-xl font-bold text-teal-900">TOTAL</span>
-            <span className="text-2xl font-bold text-teal-600">
+          <div className="flex justify-between items-center pt-4 border-t-2 border-panocef-secondary">
+            <span className="text-xl font-bold text-panocef-dark">TOTAL</span>
+            <span className="text-2xl font-bold text-panocef-primary">
               S/ {totalPrice.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </span>
           </div>

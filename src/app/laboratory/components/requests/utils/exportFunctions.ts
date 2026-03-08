@@ -6,10 +6,10 @@ export const exportToExcel = (
   formatRadiographyInfo: (data: any) => any,
   STUDY_STATUS: any,
   IMAGING_STUDY_TYPES: any,
-  useCyanTheme: boolean
+  _useCyanTheme?: boolean
 ) => {
   try {
-    const themeColor = useCyanTheme ? '#0891b2' : '#7c3aed';
+    const themeColor = '#1F4391'; // panocef-primary
     let tableHTML = `
       <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel">
       <head>
@@ -80,11 +80,11 @@ export const exportToPDF = (
   formatRadiographyInfo: (data: any) => any,
   STUDY_STATUS: any,
   IMAGING_STUDY_TYPES: any,
-  useCyanTheme: boolean
+  _useCyanTheme?: boolean
 ) => {
   try {
-    const themeColor = useCyanTheme ? '#0891b2' : '#7c3aed';
-    const themeColorDark = useCyanTheme ? '#0e7490' : '#6d28d9';
+    const themeColor = '#1F4391'; // panocef-primary
+    const themeColorDark = '#1D2864'; // panocef-dark
 
     const printWindow = window.open('', '_blank');
     if (!printWindow) {
@@ -599,7 +599,7 @@ export const handlePrintRequest = (
   formatRadiographyInfo: (data: any) => any,
   STUDY_STATUS: any,
   IMAGING_STUDY_TYPES: any,
-  useCyanTheme: boolean
+  _useCyanTheme?: boolean
 ) => {
   const printWindow = window.open('', '_blank');
   if (!printWindow) {
@@ -635,9 +635,9 @@ export const handlePrintRequest = (
     periapical: { bg: '#fce7f3', text: '#be185d', border: '#f472b6' },
     bitewing: { bg: '#dbeafe', text: '#1d4ed8', border: '#60a5fa' },
     oclusal: { bg: '#f3e8ff', text: '#6b21a8', border: '#c084fc' },
-    otrasIntraorales: { bg: '#cffafe', text: '#0e7490', border: '#22d3ee' },
+    otrasIntraorales: { bg: '#F4FCFD', text: '#1F4391', border: '#94A3D3' },
     extraorales: { bg: '#dcfce7', text: '#15803d', border: '#4ade80' },
-    asesoriaOrtodoncia: { bg: '#ede9fe', text: '#6d28d9', border: '#a78bfa' },
+    asesoriaOrtodoncia: { bg: '#F4FCFD', text: '#1F4391', border: '#94A3D3' },
     serviciosAdicionales: { bg: '#fef3c7', text: '#b45309', border: '#fbbf24' },
     analisisCefalometricos: { bg: '#ffe4e6', text: '#be123c', border: '#fb7185' },
     otros: { bg: '#f3f4f6', text: '#374151', border: '#9ca3af' }
@@ -688,7 +688,7 @@ export const handlePrintRequest = (
     return `
       <div style="background: ${colors.bg}; border: 1px solid ${colors.border}; border-radius: 6px; padding: 8px; margin-bottom: 6px;">
         <div style="display: flex; align-items: flex-start; gap: 8px;">
-          <span style="display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #0d9488; color: white; border-radius: 3px; font-size: 10px; flex-shrink: 0;">✓</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; background: #1F4391; color: white; border-radius: 3px; font-size: 10px; flex-shrink: 0;">✓</span>
           <div style="flex: 1;">
             <span style="font-weight: 600; font-size: 12px; color: ${colors.text};">${item.label}</span>
             ${detailsHTML}
@@ -718,19 +718,19 @@ export const handlePrintRequest = (
       const items = tomografiaData[catKey];
       if (!items || items.length === 0) return;
       const config = TOMO_CATEGORIES_CONFIG[catKey];
-      const colors = tomoColors[catKey] || { bg: '#cffafe', text: '#0e7490', border: '#22d3ee' };
+      const colors = tomoColors[catKey] || { bg: '#F4FCFD', text: '#1F4391', border: '#94A3D3' };
       categoriesHTML += generateCategoryHTML(config.title, items, colors);
     });
 
     tomografiaHTML = `
       <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; margin-bottom: 16px;">
-        <div style="background: linear-gradient(to right, #ecfeff, #ccfbf1); padding: 10px 16px; border-bottom: 1px solid #e5e7eb;">
+        <div style="background: linear-gradient(to right, #F4FCFD, #e0f7fa); padding: 10px 16px; border-bottom: 1px solid #e5e7eb;">
           <div style="display: flex; align-items: center; justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 8px;">
               <span style="font-size: 14px;">🔬</span>
               <span style="font-weight: bold; color: #1f2937;">Tomografía 3D</span>
             </div>
-            <span style="background: #cffafe; color: #0e7490; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500;">${Object.values(tomografiaData).flat().length} items</span>
+            <span style="background: #F4FCFD; color: #1F4391; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500;">${Object.values(tomografiaData).flat().length} items</span>
           </div>
         </div>
         <div style="padding: 12px;">${categoriesHTML}</div>
@@ -774,7 +774,7 @@ export const handlePrintRequest = (
       return `
         <div style="display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: #f9fafb; border-radius: 6px; margin-bottom: 6px;">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="width: 6px; height: 6px; border-radius: 50%; background: ${item.category === 'tomografia3D' ? '#06b6d4' : item.category === 'intraoral' ? '#3b82f6' : '#8b5cf6'}; flex-shrink: 0;"></span>
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: ${item.category === 'tomografia3D' ? '#1F4391' : item.category === 'intraoral' ? '#2F4093' : '#94A3D3'}; flex-shrink: 0;"></span>
             <span style="font-size: 12px; color: #1f2937;">${displayName}</span>
             ${displayQuantity > 1 ? `<span style="font-size: 11px; color: #9ca3af;">x${displayQuantity}</span>` : ''}
           </div>
@@ -795,7 +795,7 @@ export const handlePrintRequest = (
         </div>
         <div style="padding: 12px;">
           ${itemsHTML}
-          <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: #0d9488; border-radius: 8px; margin-top: 12px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: #1F4391; border-radius: 8px; margin-top: 12px;">
             <span style="font-size: 14px; font-weight: bold; color: white;">TOTAL</span>
             <span style="font-size: 18px; font-weight: bold; color: white;">S/ ${(pricing.finalPrice || pricing.suggestedPrice || 0).toFixed(2)}</span>
           </div>
@@ -849,7 +849,7 @@ export const handlePrintRequest = (
       <div style="max-width: 800px; margin: 0 auto; padding: 16px;">
 
         <!-- HEADER -->
-        <div style="background: linear-gradient(to right, #0d9488, #0891b2); border-radius: 12px; padding: 16px 20px; color: white; margin-bottom: 16px;">
+        <div style="background: linear-gradient(to right, #1F4391, #2F4093); border-radius: 12px; padding: 16px 20px; color: white; margin-bottom: 16px;">
           <div style="display: flex; align-items: center; justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 16px;">
               <img src="/GENESIS-PANOCEF-final-01.png" alt="PANOCEF" style="height: 50px; filter: brightness(0) invert(1);" onerror="this.style.display='none'">

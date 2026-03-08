@@ -131,7 +131,7 @@ export default function NotificationPanel({ onClose, onNotificationUpdate }: Not
       case 'system':
         return <Info className="w-5 h-5 text-blue-500" />;
       case 'appointment':
-        return <AlertCircle className="w-5 h-5 text-purple-500" />;
+        return <AlertCircle className="w-5 h-5 text-panocef-primary" />;
       case 'warning':
         return <AlertTriangle className="w-5 h-5 text-orange-500" />;
       case 'error':

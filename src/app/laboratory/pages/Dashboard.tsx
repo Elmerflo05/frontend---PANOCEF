@@ -180,8 +180,8 @@ const LaboratoryDashboard = () => {
     return (
       <div className="flex flex-col items-center justify-center h-[60vh] gap-4">
         <div className="relative">
-          <div className="w-16 h-16 border-4 border-cyan-200 rounded-full animate-spin border-t-cyan-600"></div>
-          <Sparkles className="w-6 h-6 text-cyan-600 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+          <div className="w-16 h-16 border-4 border-panocef-secondary rounded-full animate-spin border-t-panocef-primary"></div>
+          <Sparkles className="w-6 h-6 text-panocef-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
         </div>
         <p className="text-slate-600 font-medium">Cargando tu dashboard...</p>
       </div>
@@ -197,7 +197,7 @@ const LaboratoryDashboard = () => {
     >
       {/* Welcome Header */}
       <motion.div variants={itemVariants}>
-        <div className="relative overflow-hidden bg-gradient-to-br from-cyan-500 via-cyan-600 to-teal-600 rounded-2xl p-8 text-white shadow-xl">
+        <div className="relative overflow-hidden bg-gradient-to-br from-panocef-primary via-panocef-accent to-panocef-primary rounded-2xl p-8 text-white shadow-xl">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full -translate-y-1/2 translate-x-1/2"></div>
@@ -211,14 +211,14 @@ const LaboratoryDashboard = () => {
                   <div className="p-2 bg-white/20 backdrop-blur-sm rounded-xl">
                     <Activity className="w-6 h-6" />
                   </div>
-                  <span className="text-cyan-100 text-sm font-medium tracking-wide uppercase">Centro de Control</span>
+                  <span className="text-panocef-light text-sm font-medium tracking-wide uppercase">Centro de Control</span>
                 </div>
 
                 <h1 className="text-3xl md:text-4xl font-bold">
                   Bienvenido, {user?.firstName || 'Usuario'}
                 </h1>
 
-                <p className="text-cyan-100 text-lg max-w-md">
+                <p className="text-panocef-light text-lg max-w-md">
                   {isExternalClient
                     ? 'Gestiona tus solicitudes de imágenes y revisa los resultados de tus pacientes.'
                     : 'Administra las solicitudes del laboratorio y optimiza los tiempos de entrega.'
@@ -228,7 +228,7 @@ const LaboratoryDashboard = () => {
                 <div className="flex flex-wrap gap-3 pt-2">
                   <button
                     onClick={() => navigate('/laboratory/new-request')}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-cyan-700 rounded-xl font-semibold hover:bg-cyan-50 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-panocef-primary rounded-xl font-semibold hover:bg-panocef-light transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                   >
                     <Plus className="w-5 h-5" />
                     Nueva Solicitud
@@ -261,10 +261,10 @@ const LaboratoryDashboard = () => {
       {/* Stats Grid */}
       <motion.div variants={itemVariants} className="grid grid-cols-2 lg:grid-cols-5 gap-4 md:gap-6">
         {/* Total Solicitudes */}
-        <div className="group bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-lg hover:border-cyan-200 transition-all duration-300">
+        <div className="group bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-lg hover:border-panocef-secondary transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
-            <div className="p-3 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl group-hover:scale-110 transition-transform">
-              <ClipboardList className="w-6 h-6 text-cyan-600" />
+            <div className="p-3 bg-gradient-to-br from-panocef-light to-blue-50 rounded-xl group-hover:scale-110 transition-transform">
+              <ClipboardList className="w-6 h-6 text-panocef-primary" />
             </div>
             <TrendingUp className="w-5 h-5 text-emerald-500" />
           </div>
@@ -361,7 +361,7 @@ const LaboratoryDashboard = () => {
                 </div>
                 <button
                   onClick={() => navigate('/laboratory/requests')}
-                  className="text-cyan-600 hover:text-cyan-700 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all"
+                  className="text-panocef-primary hover:text-panocef-primary text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all"
                 >
                   Ver todas
                   <ArrowRight className="w-4 h-4" />
@@ -385,8 +385,8 @@ const LaboratoryDashboard = () => {
                       onClick={() => navigate(`/laboratory/requests`)}
                     >
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                          <TestTube className="w-6 h-6 text-cyan-600" />
+                        <div className="w-12 h-12 bg-gradient-to-br from-panocef-light to-blue-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                          <TestTube className="w-6 h-6 text-panocef-primary" />
                         </div>
 
                         <div className="flex-1 min-w-0">
@@ -422,7 +422,7 @@ const LaboratoryDashboard = () => {
                   </p>
                   <button
                     onClick={() => navigate('/laboratory/new-request')}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-cyan-600 text-white rounded-xl font-medium hover:bg-cyan-700 transition-colors"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-panocef-primary text-white rounded-xl font-medium hover:bg-panocef-dark transition-colors"
                   >
                     <Plus className="w-5 h-5" />
                     Nueva Solicitud
@@ -441,9 +441,9 @@ const LaboratoryDashboard = () => {
             <div className="space-y-3">
               <button
                 onClick={() => navigate('/laboratory/new-request')}
-                className="w-full flex items-center gap-4 p-4 text-left bg-gradient-to-r from-cyan-50 to-teal-50 hover:from-cyan-100 hover:to-teal-100 rounded-xl transition-all group border border-cyan-100"
+                className="w-full flex items-center gap-4 p-4 text-left bg-gradient-to-r from-panocef-light to-blue-50 hover:from-blue-50 hover:to-panocef-light rounded-xl transition-all group border border-panocef-secondary"
               >
-                <div className="w-10 h-10 bg-cyan-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 bg-panocef-primary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Plus className="w-5 h-5 text-white" />
                 </div>
                 <div>

@@ -11,33 +11,39 @@ interface SectionHeaderProps {
   showSaveButton?: boolean;
   onSave?: () => void;
   loading?: boolean;
-  colorTheme?: 'cyan' | 'purple' | 'teal' | 'blue';
+  colorTheme?: 'cyan' | 'purple' | 'teal' | 'blue' | 'panocef';
 }
 
 const themeColors = {
   cyan: {
-    bg: 'bg-cyan-600',
+    bg: 'bg-panocef-primary',
     text: 'text-white',
-    subtitle: 'text-cyan-100',
-    button: 'bg-white text-cyan-600 hover:bg-cyan-50'
+    subtitle: 'text-panocef-light',
+    button: 'bg-white text-panocef-primary hover:bg-panocef-light'
   },
   purple: {
-    bg: 'bg-purple-600',
+    bg: 'bg-panocef-primary',
     text: 'text-white',
-    subtitle: 'text-purple-100',
-    button: 'bg-white text-purple-600 hover:bg-purple-50'
+    subtitle: 'text-panocef-light',
+    button: 'bg-white text-panocef-primary hover:bg-panocef-light'
   },
   teal: {
-    bg: 'bg-teal-600',
+    bg: 'bg-panocef-accent',
     text: 'text-white',
-    subtitle: 'text-teal-100',
-    button: 'bg-white text-teal-600 hover:bg-teal-50'
+    subtitle: 'text-panocef-light',
+    button: 'bg-white text-panocef-accent hover:bg-panocef-light'
   },
   blue: {
-    bg: 'bg-blue-600',
+    bg: 'bg-panocef-accent',
     text: 'text-white',
-    subtitle: 'text-blue-100',
-    button: 'bg-white text-blue-600 hover:bg-blue-50'
+    subtitle: 'text-panocef-light',
+    button: 'bg-white text-panocef-accent hover:bg-panocef-light'
+  },
+  panocef: {
+    bg: 'bg-panocef-primary',
+    text: 'text-white',
+    subtitle: 'text-panocef-light',
+    button: 'bg-white text-panocef-primary hover:bg-panocef-light'
   }
 };
 

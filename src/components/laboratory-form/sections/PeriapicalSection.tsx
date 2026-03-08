@@ -122,8 +122,8 @@ export const PeriapicalSection = ({
       if (readOnly) {
         if (isSelected) {
           return {
-            backgroundColor: mode === 'fisico' ? '#ec4899' : '#6366f1',
-            borderColor: mode === 'fisico' ? '#db2777' : '#4f46e5',
+            backgroundColor: mode === 'fisico' ? '#ec4899' : '#1F4391',
+            borderColor: mode === 'fisico' ? '#db2777' : '#1D2864',
             color: 'white',
             boxShadow: '0 1px 3px rgba(0,0,0,0.2)'
           };
@@ -138,8 +138,8 @@ export const PeriapicalSection = ({
       }
       if (isSelected) {
         return {
-          backgroundColor: mode === 'fisico' ? '#ec4899' : '#6366f1',
-          borderColor: mode === 'fisico' ? '#db2777' : '#4f46e5',
+          backgroundColor: mode === 'fisico' ? '#ec4899' : '#1F4391',
+          borderColor: mode === 'fisico' ? '#db2777' : '#1D2864',
           color: 'white'
         };
       }
@@ -191,7 +191,7 @@ export const PeriapicalSection = ({
       if (isActive) {
         return color === 'pink'
           ? 'bg-pink-500 text-white shadow-md border-2 border-pink-600'
-          : 'bg-indigo-500 text-white shadow-md border-2 border-indigo-600';
+          : 'bg-panocef-primary text-white shadow-md border-2 border-panocef-dark';
       } else {
         return 'bg-gray-100 border border-gray-200 text-gray-400 opacity-40';
       }
@@ -199,11 +199,11 @@ export const PeriapicalSection = ({
     if (isActive) {
       return color === 'pink'
         ? 'bg-pink-500 text-white shadow-md'
-        : 'bg-indigo-500 text-white shadow-md';
+        : 'bg-panocef-primary text-white shadow-md';
     }
     return color === 'pink'
       ? 'bg-white border-2 border-pink-300 text-pink-700 hover:bg-pink-50'
-      : 'bg-white border-2 border-indigo-300 text-indigo-700 hover:bg-indigo-50';
+      : 'bg-white border-2 border-panocef-secondary text-panocef-primary hover:bg-panocef-light';
   };
 
   return (
@@ -289,18 +289,18 @@ export const PeriapicalSection = ({
 
       {/* Panel de selección de dientes - MODO DIGITAL */}
       {modoDigitalActivo && (
-        <div className="mb-6 bg-white rounded-lg p-4 border-2 border-indigo-300">
+        <div className="mb-6 bg-white rounded-lg p-4 border-2 border-panocef-secondary">
           <div className="flex items-center justify-between mb-3">
-            <h4 className="font-bold text-indigo-700 text-base flex items-center gap-2">
+            <h4 className="font-bold text-panocef-primary text-base flex items-center gap-2">
               MODO DIGITAL - Selección de Dientes
               {selectedTeethDigital.length > 0 && (
-                <span className="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded-full">
+                <span className="bg-panocef-light text-panocef-dark text-xs px-2 py-1 rounded-full">
                   {selectedTeethDigital.length} seleccionados
                 </span>
               )}
             </h4>
             {showPrices && pricing && selectedTeethDigital.length > 0 && (
-              <span className="text-sm font-semibold text-indigo-700 bg-indigo-100 px-3 py-1 rounded-lg">
+              <span className="text-sm font-semibold text-panocef-primary bg-panocef-light px-3 py-1 rounded-lg">
                 Subtotal: S/{calcularPrecioDigital().toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
             )}

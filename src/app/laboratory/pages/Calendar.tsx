@@ -22,24 +22,24 @@ import type { Appointment, Patient, User as UserType } from '@/types';
 import { NewRequestModal } from '@/components/laboratory/NewRequestModal';
 import { useAuth } from '@/hooks/useAuth';
 
-// Función para obtener tipos de estudios con colores condicionales
-const getImagingStudyTypes = (useCyanTheme: boolean): Record<string, { label: string; icon: string; color: string }> => ({
-  rayos_x: { label: 'Rayos X', icon: '📷', color: useCyanTheme ? 'bg-cyan-50 text-cyan-700' : 'bg-blue-50 text-blue-700' },
-  panoramica: { label: 'Panorámica', icon: '🌐', color: useCyanTheme ? 'bg-cyan-50 text-cyan-700' : 'bg-purple-50 text-purple-700' },
-  tomografia: { label: 'Tomografía', icon: '🔬', color: useCyanTheme ? 'bg-teal-50 text-teal-700' : 'bg-red-50 text-red-700' },
-  cefalometria: { label: 'Cefalometría', icon: '📐', color: useCyanTheme ? 'bg-teal-50 text-teal-700' : 'bg-green-50 text-green-700' },
+// Función para obtener tipos de estudios con colores PanoCef
+const getImagingStudyTypes = (): Record<string, { label: string; icon: string; color: string }> => ({
+  rayos_x: { label: 'Rayos X', icon: '📷', color: 'bg-panocef-light text-panocef-primary' },
+  panoramica: { label: 'Panorámica', icon: '🌐', color: 'bg-panocef-light text-panocef-primary' },
+  tomografia: { label: 'Tomografía', icon: '🔬', color: 'bg-panocef-light text-panocef-accent' },
+  cefalometria: { label: 'Cefalometría', icon: '📐', color: 'bg-panocef-light text-panocef-accent' },
   periapical: { label: 'Periapical', icon: '🦷', color: 'bg-yellow-50 text-yellow-700' },
-  oclusal: { label: 'Oclusal', icon: '🔍', color: useCyanTheme ? 'bg-cyan-50 text-cyan-700' : 'bg-indigo-50 text-indigo-700' }
+  oclusal: { label: 'Oclusal', icon: '🔍', color: 'bg-panocef-light text-panocef-primary' }
 });
 
-// Función para obtener estados de estudios con colores condicionales
+// Función para obtener estados de estudios con colores PanoCef
 // Estados automáticos:
 // - pending: Recién ingresada
 // - completed: Se subieron los resultados
 // - delivered: El cliente ya visualizó los resultados
-const getStudyStatus = (useCyanTheme: boolean): Record<string, { label: string; icon: any; color: string }> => ({
+const getStudyStatus = (): Record<string, { label: string; icon: any; color: string }> => ({
   pending: { label: 'Pendiente', icon: Clock, color: 'bg-yellow-100 text-yellow-800' },
-  completed: { label: 'Completado', icon: CheckCircle2, color: useCyanTheme ? 'bg-teal-100 text-teal-800' : 'bg-green-100 text-green-800' },
+  completed: { label: 'Completado', icon: CheckCircle2, color: 'bg-green-100 text-green-800' },
   delivered: { label: 'Entregado', icon: Package, color: 'bg-gray-100 text-gray-800' }
 });
 
@@ -50,7 +50,6 @@ interface ImagingRequestWithDetails extends Appointment {
 
 const ImagingCalendar = () => {
   const { user } = useAuth();
-  const useCyanTheme = user?.role === 'imaging_technician' || user?.role === 'external_client';
 
   const [appointments, setAppointments] = useState<ImagingRequestWithDetails[]>([]);
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -65,8 +64,8 @@ const ImagingCalendar = () => {
   const [showNewRequestModal, setShowNewRequestModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
 
-  const IMAGING_STUDY_TYPES = getImagingStudyTypes(useCyanTheme);
-  const STUDY_STATUS = getStudyStatus(useCyanTheme);
+  const IMAGING_STUDY_TYPES = getImagingStudyTypes();
+  const STUDY_STATUS = getStudyStatus();
 
   useEffect(() => {
     loadData();
@@ -335,7 +334,7 @@ const ImagingCalendar = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className={`animate-spin rounded-full h-8 w-8 border-b-2 ${useCyanTheme ? 'border-cyan-600' : 'border-purple-600'}`}></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-panocef-primary"></div>
       </div>
     );
   }
@@ -354,8 +353,8 @@ const ImagingCalendar = () => {
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${useCyanTheme ? 'bg-cyan-100' : 'bg-purple-100'}`}>
-                <FileImage className={`w-6 h-6 ${useCyanTheme ? 'text-cyan-600' : 'text-purple-600'}`} />
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-panocef-light">
+                <FileImage className="w-6 h-6 text-panocef-primary" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">Calendario de Solicitudes</h1>
@@ -368,7 +367,7 @@ const ImagingCalendar = () => {
                 setCurrentDate(new Date());
                 loadData();
               }}
-              className={`flex items-center gap-2 px-4 py-2 border rounded-lg transition-colors ${useCyanTheme ? 'text-cyan-600 border-cyan-300 hover:bg-cyan-50' : 'text-purple-600 border-purple-300 hover:bg-purple-50'}`}
+              className="flex items-center gap-2 px-4 py-2 border rounded-lg transition-colors text-panocef-primary border-panocef-secondary hover:bg-panocef-light"
             >
               <RefreshCw className="w-4 h-4" />
               Actualizar
@@ -387,13 +386,13 @@ const ImagingCalendar = () => {
               </div>
             </div>
 
-            <div className={`p-4 rounded-lg border ${useCyanTheme ? 'bg-teal-50 border-teal-200' : 'bg-green-50 border-green-200'}`}>
+            <div className="p-4 rounded-lg border bg-green-50 border-green-200">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className={`text-sm ${useCyanTheme ? 'text-teal-700' : 'text-green-700'}`}>Completados</p>
-                  <p className={`text-2xl font-bold ${useCyanTheme ? 'text-teal-900' : 'text-green-900'}`}>{stats.completed}</p>
+                  <p className="text-sm text-green-700">Completados</p>
+                  <p className="text-2xl font-bold text-green-900">{stats.completed}</p>
                 </div>
-                <CheckCircle2 className={`w-8 h-8 ${useCyanTheme ? 'text-teal-600' : 'text-green-600'}`} />
+                <CheckCircle2 className="w-8 h-8 text-green-600" />
               </div>
             </div>
 
@@ -483,7 +482,7 @@ const ImagingCalendar = () => {
                 onClick={() => setViewMode('day')}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                   viewMode === 'day'
-                    ? `bg-white shadow-sm ${useCyanTheme ? 'text-cyan-600' : 'text-purple-600'}`
+                    ? `bg-white shadow-sm ${'text-panocef-primary'}`
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -493,7 +492,7 @@ const ImagingCalendar = () => {
                 onClick={() => setViewMode('week')}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                   viewMode === 'week'
-                    ? `bg-white shadow-sm ${useCyanTheme ? 'text-cyan-600' : 'text-purple-600'}`
+                    ? `bg-white shadow-sm ${'text-panocef-primary'}`
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -503,7 +502,7 @@ const ImagingCalendar = () => {
                 onClick={() => setViewMode('month')}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                   viewMode === 'month'
-                    ? `bg-white shadow-sm ${useCyanTheme ? 'text-cyan-600' : 'text-purple-600'}`
+                    ? `bg-white shadow-sm ${'text-panocef-primary'}`
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -536,7 +535,7 @@ const ImagingCalendar = () => {
                     return (
                       <div
                         key={appointment.id}
-                        className={`p-4 border-2 border-gray-200 rounded-lg transition-all hover:shadow-md cursor-pointer ${useCyanTheme ? 'hover:border-cyan-300' : 'hover:border-purple-300'}`}
+                        className={`p-4 border-2 border-gray-200 rounded-lg transition-all hover:shadow-md cursor-pointer ${'hover:border-panocef-secondary'}`}
                         onClick={() => {
                           setSelectedAppointment(appointment);
                           setShowDetailsModal(true);
@@ -566,7 +565,7 @@ const ImagingCalendar = () => {
                             </div>
                           </div>
 
-                          <button className={`font-medium text-sm flex items-center gap-1 ${useCyanTheme ? 'text-cyan-600 hover:text-cyan-700' : 'text-purple-600 hover:text-purple-700'}`}>
+                          <button className={`font-medium text-sm flex items-center gap-1 ${'text-panocef-primary hover:text-panocef-dark'}`}>
                             <Eye className="w-4 h-4" />
                             Ver Detalles
                           </button>
@@ -595,13 +594,13 @@ const ImagingCalendar = () => {
                   const isToday = dayDate.toDateString() === new Date().toDateString();
 
                   return (
-                    <div key={index} className={`border rounded-lg ${isToday ? (useCyanTheme ? 'border-cyan-300 bg-cyan-50' : 'border-purple-300 bg-purple-50') : 'border-gray-200'}`}>
-                      <div className={`p-3 border-b ${isToday ? (useCyanTheme ? 'bg-cyan-100 border-cyan-200' : 'bg-purple-100 border-purple-200') : 'bg-gray-50 border-gray-200'}`}>
+                    <div key={index} className={`border rounded-lg ${isToday ? 'border-panocef-secondary bg-panocef-light' : 'border-gray-200'}`}>
+                      <div className={`p-3 border-b ${isToday ? 'bg-panocef-light border-panocef-secondary' : 'bg-gray-50 border-gray-200'}`}>
                         <div className="flex items-center justify-between">
-                          <span className={`font-semibold ${isToday ? (useCyanTheme ? 'text-cyan-900' : 'text-purple-900') : 'text-gray-900'}`}>
+                          <span className={`font-semibold ${isToday ? 'text-panocef-dark' : 'text-gray-900'}`}>
                             {dayName}, {dayDate.getDate()} de {dayDate.toLocaleDateString('es-ES', { month: 'long' })}
                           </span>
-                          <span className={`text-sm ${isToday ? (useCyanTheme ? 'text-cyan-700' : 'text-purple-700') : 'text-gray-600'}`}>
+                          <span className={`text-sm ${isToday ? 'text-panocef-primary' : 'text-gray-600'}`}>
                             {dayAppointments.length} estudio{dayAppointments.length !== 1 ? 's' : ''}
                           </span>
                         </div>
@@ -619,7 +618,7 @@ const ImagingCalendar = () => {
                               return (
                                 <div
                                   key={apt.id}
-                                  className={`flex items-center gap-3 p-2 bg-white rounded border border-gray-200 cursor-pointer ${useCyanTheme ? 'hover:border-cyan-300' : 'hover:border-purple-300'}`}
+                                  className={`flex items-center gap-3 p-2 bg-white rounded border border-gray-200 cursor-pointer ${'hover:border-panocef-secondary'}`}
                                   onClick={() => {
                                     setSelectedAppointment(apt);
                                     setShowDetailsModal(true);
@@ -674,15 +673,15 @@ const ImagingCalendar = () => {
                         key={day}
                         className={`p-2 border rounded-lg min-h-[100px] transition-colors cursor-pointer ${
                           isToday
-                            ? (useCyanTheme ? 'border-cyan-500 bg-cyan-50' : 'border-purple-500 bg-purple-50')
+                            ? 'border-panocef-primary bg-panocef-light'
                             : 'border-gray-200'
-                        } ${useCyanTheme ? 'hover:border-cyan-300' : 'hover:border-purple-300'}`}
+                        } ${'hover:border-panocef-secondary'}`}
                         onClick={() => {
                           setSelectedDate(dayDate);
                           setShowNewRequestModal(true);
                         }}
                       >
-                        <div className={`text-sm font-semibold mb-1 ${isToday ? (useCyanTheme ? 'text-cyan-700' : 'text-purple-700') : 'text-gray-900'}`}>
+                        <div className={`text-sm font-semibold mb-1 ${isToday ? 'text-panocef-primary' : 'text-gray-900'}`}>
                           {day}
                         </div>
                         {dayAppointments.length > 0 && (
@@ -820,7 +819,7 @@ const ImagingCalendar = () => {
                 {selectedAppointment.imagingStudy?.technicianNotes && (
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-2">Notas del Técnico</h4>
-                    <div className={`text-sm p-4 rounded-lg border ${useCyanTheme ? 'bg-cyan-50 border-cyan-200' : 'bg-purple-50 border-purple-200'}`}>
+                    <div className={`text-sm p-4 rounded-lg border ${'bg-panocef-light border-panocef-secondary'}`}>
                       {selectedAppointment.imagingStudy.technicianNotes}
                     </div>
                   </div>

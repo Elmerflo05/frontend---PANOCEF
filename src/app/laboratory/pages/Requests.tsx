@@ -31,13 +31,11 @@ interface ImagingRequestWithDetails extends Appointment {
 
 const ImagingRequests = () => {
   const { user } = useAuth();
-  const useCyanTheme = user?.role === 'imaging_technician' || user?.role === 'external_client';
-
   // SuperAdmin y Admin pueden ver todas las solicitudes (internas + externas)
   const isSuperAdminOrAdmin = user?.role === 'super_admin' || user?.role === 'admin';
 
-  const IMAGING_STUDY_TYPES = getImagingStudyTypes(useCyanTheme);
-  const STUDY_STATUS = getStudyStatus(useCyanTheme);
+  const IMAGING_STUDY_TYPES = getImagingStudyTypes();
+  const STUDY_STATUS = getStudyStatus();
 
   const [requests, setRequests] = useState<ImagingRequestWithDetails[]>([]);
   const [filteredRequests, setFilteredRequests] = useState<ImagingRequestWithDetails[]>([]);
@@ -308,7 +306,7 @@ const ImagingRequests = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className={`animate-spin rounded-full h-8 w-8 border-b-2 ${useCyanTheme ? 'border-cyan-600' : 'border-purple-600'}`}></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-panocef-primary"></div>
         <span className="ml-2 text-gray-600">Cargando solicitudes...</span>
       </div>
     );
@@ -329,11 +327,11 @@ const ImagingRequests = () => {
     >
       {/* Header with modular component */}
       <RequestsHeader
-        useCyanTheme={useCyanTheme}
+        useCyanTheme={true}
         title={isSuperAdminOrAdmin ? 'Todas las Solicitudes de Laboratorio' : 'Solicitudes de Estudios de Imágenes'}
         subtitle={isSuperAdminOrAdmin ? 'Vista completa: internas + externas, todos los estados' : 'Gestión de órdenes de estudios radiológicos'}
-        onExportPDF={() => exportToPDF(filteredRequests, formatRadiographyInfo, STUDY_STATUS, IMAGING_STUDY_TYPES, useCyanTheme)}
-        onExportExcel={() => exportToExcel(filteredRequests, formatRadiographyInfo, STUDY_STATUS, IMAGING_STUDY_TYPES, useCyanTheme)}
+        onExportPDF={() => exportToPDF(filteredRequests, formatRadiographyInfo, STUDY_STATUS, IMAGING_STUDY_TYPES)}
+        onExportExcel={() => exportToExcel(filteredRequests, formatRadiographyInfo, STUDY_STATUS, IMAGING_STUDY_TYPES)}
         onNewRequest={() => setShowNewRequestModal(true)}
         onRefresh={loadRequests}
       />
@@ -343,14 +341,14 @@ const ImagingRequests = () => {
         searchTerm={searchTerm}
         statusFilter={statusFilter}
         typeFilter={typeFilter}
-        useCyanTheme={useCyanTheme}
+        useCyanTheme={true}
         onSearchChange={setSearchTerm}
         onStatusChange={setStatusFilter}
         onTypeChange={setTypeFilter}
       />
 
       {/* Stats Summary with modular component - Sin Completados/Entregados (eso está en Resultados) */}
-      <RequestsStats stats={stats} useCyanTheme={useCyanTheme} showCompletedAndDelivered={false} />
+      <RequestsStats stats={stats} useCyanTheme={true} showCompletedAndDelivered={false} />
 
       {/* Requests List */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200">
@@ -377,7 +375,7 @@ const ImagingRequests = () => {
               <RequestCard
                 key={request.id}
                 request={request}
-                useCyanTheme={useCyanTheme}
+                useCyanTheme={true}
                 userRole={user?.role}
                 formatRadiographyInfo={formatRadiographyInfo}
                 getPriorityColor={getPriorityColor}
@@ -385,7 +383,7 @@ const ImagingRequests = () => {
                   setSelectedRequest(request);
                   setShowDetailsModal(true);
                 }}
-                onPrint={() => handlePrintRequest(request, formatRadiographyInfo, STUDY_STATUS, IMAGING_STUDY_TYPES, useCyanTheme)}
+                onPrint={() => handlePrintRequest(request, formatRadiographyInfo, STUDY_STATUS, IMAGING_STUDY_TYPES)}
                 onSetPrice={() => {
                   setSelectedRequest(request);
                   setShowPriceModal(true);
@@ -411,7 +409,7 @@ const ImagingRequests = () => {
           request={selectedRequest}
           IMAGING_STUDY_TYPES={IMAGING_STUDY_TYPES}
           STUDY_STATUS={STUDY_STATUS}
-          useCyanTheme={useCyanTheme}
+          useCyanTheme={true}
           onClose={() => setShowDetailsModal(false)}
           userRole={user?.role}
           onCounterOffer={handleCounterOffer}

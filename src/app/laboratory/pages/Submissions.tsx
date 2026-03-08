@@ -39,11 +39,8 @@ const SubmissionsPage = () => {
   const { user } = useAuthStore();
   const isExternalClient = user?.role === 'external_client';
 
-  // Siempre usar tema cyan para esta página
-  const useCyanTheme = true;
-
-  const IMAGING_STUDY_TYPES = getImagingStudyTypes(useCyanTheme);
-  const STUDY_STATUS = getStudyStatus(useCyanTheme);
+  const IMAGING_STUDY_TYPES = getImagingStudyTypes();
+  const STUDY_STATUS = getStudyStatus();
 
   const [requests, setRequests] = useState<ImagingRequestWithDetails[]>([]);
   const [filteredRequests, setFilteredRequests] = useState<ImagingRequestWithDetails[]>([]);
@@ -330,7 +327,7 @@ const SubmissionsPage = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className={`animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-600`}></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-panocef-primary"></div>
         <span className="ml-2 text-gray-600">Cargando solicitudes...</span>
       </div>
     );
@@ -351,13 +348,13 @@ const SubmissionsPage = () => {
     >
       {/* Header - MISMO componente que Requests.tsx */}
       <RequestsHeader
-        useCyanTheme={useCyanTheme}
+        useCyanTheme={true}
         title={isExternalClient ? 'Mis Solicitudes' : 'Solicitudes Externas'}
         subtitle={isExternalClient
           ? 'Gestiona tus solicitudes de radiografía y tomografía'
           : 'Solicitudes de clientes externos (odontólogos)'}
-        onExportPDF={() => exportToPDF(filteredRequests, formatRadiographyInfo, STUDY_STATUS, IMAGING_STUDY_TYPES, useCyanTheme)}
-        onExportExcel={() => exportToExcel(filteredRequests, formatRadiographyInfo, STUDY_STATUS, IMAGING_STUDY_TYPES, useCyanTheme)}
+        onExportPDF={() => exportToPDF(filteredRequests, formatRadiographyInfo, STUDY_STATUS, IMAGING_STUDY_TYPES)}
+        onExportExcel={() => exportToExcel(filteredRequests, formatRadiographyInfo, STUDY_STATUS, IMAGING_STUDY_TYPES)}
         onNewRequest={() => window.location.href = '/laboratory/new-request'}
         onRefresh={loadRequests}
       />
@@ -367,14 +364,14 @@ const SubmissionsPage = () => {
         searchTerm={searchTerm}
         statusFilter={statusFilter}
         typeFilter={typeFilter}
-        useCyanTheme={useCyanTheme}
+        useCyanTheme={true}
         onSearchChange={setSearchTerm}
         onStatusChange={setStatusFilter}
         onTypeChange={setTypeFilter}
       />
 
       {/* Stats Summary - Sin Completados/Entregados (eso está en Resultados) */}
-      <RequestsStats stats={stats} useCyanTheme={useCyanTheme} showCompletedAndDelivered={false} />
+      <RequestsStats stats={stats} useCyanTheme={true} showCompletedAndDelivered={false} />
 
       {/* Requests List - MISMO formato que Requests.tsx */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200">
@@ -403,7 +400,7 @@ const SubmissionsPage = () => {
               <RequestCard
                 key={request.id}
                 request={request}
-                useCyanTheme={useCyanTheme}
+                useCyanTheme={true}
                 userRole={user?.role}
                 formatRadiographyInfo={formatRadiographyInfo}
                 getPriorityColor={getPriorityColor}
@@ -411,7 +408,7 @@ const SubmissionsPage = () => {
                   setSelectedRequest(request);
                   setShowDetailsModal(true);
                 }}
-                onPrint={() => handlePrintRequest(request, formatRadiographyInfo, STUDY_STATUS, IMAGING_STUDY_TYPES, useCyanTheme)}
+                onPrint={() => handlePrintRequest(request, formatRadiographyInfo, STUDY_STATUS, IMAGING_STUDY_TYPES)}
                 onSetPrice={() => {
                   setSelectedRequest(request);
                   setShowPriceModal(true);
@@ -437,7 +434,7 @@ const SubmissionsPage = () => {
           request={selectedRequest}
           IMAGING_STUDY_TYPES={IMAGING_STUDY_TYPES}
           STUDY_STATUS={STUDY_STATUS}
-          useCyanTheme={useCyanTheme}
+          useCyanTheme={true}
           onClose={() => setShowDetailsModal(false)}
         />
       )}

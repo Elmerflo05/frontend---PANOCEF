@@ -28,16 +28,16 @@ export const PatientDataSection = ({
 }: PatientDataSectionProps) => {
   const themeColors = {
     cyan: {
-      bg: 'bg-cyan-50',
-      border: 'border-cyan-200',
-      title: 'text-cyan-900',
-      focus: 'focus:ring-cyan-500 focus:border-cyan-500'
+      bg: 'bg-panocef-light',
+      border: 'border-panocef-secondary',
+      title: 'text-panocef-dark',
+      focus: 'focus:ring-panocef-primary focus:border-panocef-primary'
     },
     purple: {
-      bg: 'bg-purple-50',
-      border: 'border-purple-200',
-      title: 'text-purple-900',
-      focus: 'focus:ring-purple-500 focus:border-purple-500'
+      bg: 'bg-panocef-light',
+      border: 'border-panocef-secondary',
+      title: 'text-panocef-dark',
+      focus: 'focus:ring-panocef-primary focus:border-panocef-primary'
     }
   };
 

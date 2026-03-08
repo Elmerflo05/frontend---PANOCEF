@@ -10,14 +10,15 @@ interface RadioOptionProps {
   checked: boolean;
   onChange: (value: string) => void;
   disabled?: boolean;
-  colorTheme?: 'cyan' | 'purple' | 'amber' | 'blue';
+  colorTheme?: 'cyan' | 'purple' | 'amber' | 'blue' | 'panocef';
 }
 
 const themeColors = {
-  cyan: 'text-cyan-600 focus:ring-cyan-500',
-  purple: 'text-purple-600 focus:ring-purple-500',
+  cyan: 'text-panocef-primary focus:ring-panocef-primary',
+  purple: 'text-panocef-primary focus:ring-panocef-primary',
   amber: 'text-amber-600 focus:ring-amber-500',
-  blue: 'text-blue-600 focus:ring-blue-500'
+  blue: 'text-panocef-accent focus:ring-panocef-accent',
+  panocef: 'text-panocef-primary focus:ring-panocef-primary'
 };
 
 export const RadioOption = ({

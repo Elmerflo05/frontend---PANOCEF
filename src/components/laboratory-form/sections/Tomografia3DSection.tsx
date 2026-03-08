@@ -56,11 +56,9 @@ export const Tomografia3DSection = ({
   const isReadOnly = mode === 'view' || readOnly;
   const isPricingMode = mode === 'pricing';
 
-  const headerBg = colorTheme === 'cyan' ? 'bg-cyan-600' : 'bg-purple-600';
-  const headerText = colorTheme === 'cyan' ? 'text-cyan-100' : 'text-purple-100';
-  const buttonColor = colorTheme === 'cyan'
-    ? 'bg-white text-cyan-600 hover:bg-cyan-50'
-    : 'bg-white text-purple-600 hover:bg-purple-50';
+  const headerBg = 'bg-panocef-primary';
+  const headerText = 'text-panocef-light';
+  const buttonColor = 'bg-white text-panocef-primary hover:bg-panocef-light';
 
   // Renderizar input de precio
   const renderPriceInput = (
@@ -120,11 +118,11 @@ export const Tomografia3DSection = ({
   // ============================================================================
   if (isPricingMode) {
     return (
-      <div className="bg-cyan-50 border border-cyan-200 p-6 mb-6 rounded-xl">
-        <div className="flex items-center justify-between mb-6 pb-3 border-b-2 border-cyan-400">
+      <div className="bg-panocef-light border border-panocef-secondary p-6 mb-6 rounded-xl">
+        <div className="flex items-center justify-between mb-6 pb-3 border-b-2 border-panocef-primary">
           <div className="flex items-center gap-3">
-            <FileImage className="w-6 h-6 text-cyan-700" />
-            <h2 className="text-lg font-bold text-cyan-900">Paso 1: Tomografía 3D</h2>
+            <FileImage className="w-6 h-6 text-panocef-primary" />
+            <h2 className="text-lg font-bold text-panocef-dark">Paso 1: Tomografía 3D</h2>
             {isReadOnly && (
               <span className="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded">
                 Solo lectura
@@ -135,7 +133,7 @@ export const Tomografia3DSection = ({
             <button
               onClick={onSave}
               disabled={loading}
-              className="flex items-center gap-2 px-4 py-2 bg-cyan-600 text-white rounded hover:bg-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
+              className="flex items-center gap-2 px-4 py-2 bg-panocef-primary text-white rounded hover:bg-panocef-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
             >
               <Save className="w-4 h-4" />
               {loading ? 'Guardando...' : 'Guardar'}
@@ -185,8 +183,8 @@ export const Tomografia3DSection = ({
           </div>
 
           {/* Ortodoncia */}
-          <div className="bg-purple-50 border border-purple-200 p-4 rounded">
-            <SubsectionTitle title="Ortodoncia" colorTheme="purple" />
+          <div className="bg-panocef-light border border-panocef-secondary p-4 rounded">
+            <SubsectionTitle title="Ortodoncia" colorTheme="panocef" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {renderPriceInput('MARPE', 'marpe')}
               {renderPriceInput('Mini Implantes', 'miniImplantes')}
@@ -231,8 +229,8 @@ export const Tomografia3DSection = ({
 
       <div className="p-6 space-y-6">
         {/* Tipo de Entrega */}
-        <div className={`rounded-lg p-5 border ${colorTheme === 'cyan' ? 'bg-cyan-50/50 border-cyan-200' : 'bg-purple-50/50 border-purple-200'}`}>
-          <h3 className={`font-semibold mb-4 ${colorTheme === 'cyan' ? 'text-cyan-900' : 'text-purple-900'}`}>
+        <div className="rounded-lg p-5 border bg-panocef-light/50 border-panocef-secondary">
+          <h3 className="font-semibold mb-4 text-panocef-dark">
             Tipo de Entrega
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -253,7 +251,7 @@ export const Tomografia3DSection = ({
                   type="text"
                   value={formData.numeroPiezasEndo || ''}
                   onChange={(e) => onFormChange('numeroPiezasEndo', e.target.value)}
-                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-panocef-primary"
                   placeholder="N° Piezas"
                   disabled={isReadOnly}
                 />
@@ -265,7 +263,7 @@ export const Tomografia3DSection = ({
                   type="text"
                   value={formData.numeroPiezasFractura || ''}
                   onChange={(e) => onFormChange('numeroPiezasFractura', e.target.value)}
-                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-panocef-primary"
                   placeholder="N° Piezas"
                   disabled={isReadOnly}
                 />
@@ -277,7 +275,7 @@ export const Tomografia3DSection = ({
                   type="text"
                   value={formData.numeroPiezasAnatEndo || ''}
                   onChange={(e) => onFormChange('numeroPiezasAnatEndo', e.target.value)}
-                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-panocef-primary"
                   placeholder="N° Piezas"
                   disabled={isReadOnly}
                 />
@@ -297,7 +295,7 @@ export const Tomografia3DSection = ({
                     type="text"
                     value={formData.numeroPiezasLoc || ''}
                     onChange={(e) => onFormChange('numeroPiezasLoc', e.target.value)}
-                    className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-purple-500"
+                    className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-panocef-primary"
                     placeholder="N° Piezas"
                     disabled={isReadOnly}
                   />
@@ -312,7 +310,7 @@ export const Tomografia3DSection = ({
                       type="text"
                       value={formData.numeroCortes || ''}
                       onChange={(e) => onFormChange('numeroCortes', e.target.value)}
-                      className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-purple-500"
+                      className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-panocef-primary"
                       placeholder="N° Cortes"
                       disabled={isReadOnly}
                     />
@@ -423,8 +421,8 @@ export const Tomografia3DSection = ({
         </div>
 
         {/* ORTODONCIA */}
-        <div className="bg-indigo-50/50 rounded-lg p-5 border border-indigo-200">
-          <SubsectionTitle title="ORTODONCIA" colorTheme="indigo" />
+        <div className="bg-panocef-light/50 rounded-lg p-5 border border-panocef-secondary">
+          <SubsectionTitle title="ORTODONCIA" colorTheme="panocef" />
           <div className="space-y-3">
             {renderCheckbox('MARPE', 'marpe', 'marpe')}
 
@@ -437,28 +435,28 @@ export const Tomografia3DSection = ({
                     checked={formData.intraAlveolares || false}
                     onChange={(val) => onFormChange('intraAlveolares', val)}
                     disabled={isReadOnly}
-                    colorTheme="indigo"
+                    colorTheme="panocef"
                   />
                   <CheckboxItem
                     label="Extra-alveolares"
                     checked={formData.extraAlveolares || false}
                     onChange={(val) => onFormChange('extraAlveolares', val)}
                     disabled={isReadOnly}
-                    colorTheme="indigo"
+                    colorTheme="panocef"
                   />
                   <CheckboxItem
                     label="Infracigomático"
                     checked={formData.infracigomatico || false}
                     onChange={(val) => onFormChange('infracigomatico', val)}
                     disabled={isReadOnly}
-                    colorTheme="indigo"
+                    colorTheme="panocef"
                   />
                   <CheckboxItem
                     label="Buccal Shelf"
                     checked={formData.buccalShelf || false}
                     onChange={(val) => onFormChange('buccalShelf', val)}
                     disabled={isReadOnly}
-                    colorTheme="indigo"
+                    colorTheme="panocef"
                   />
                 </div>
               )
@@ -497,7 +495,7 @@ export const Tomografia3DSection = ({
 
                 {/* Segunda pregunta: ¿Impreso o Digital? */}
                 {formData.tipoGuiaOrtodoncia === 'conGuia' && (
-                  <div className="p-4 border-2 rounded-lg bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200">
+                  <div className="p-4 border-2 rounded-lg bg-gradient-to-r from-panocef-light to-blue-50 border-panocef-secondary">
                     <p className="mb-3 text-sm font-semibold text-gray-900">¿Impreso o No impreso (digital)?</p>
                     <div className="flex gap-3">
                       <label className="flex items-center gap-2 p-3 transition-colors border-2 rounded-lg cursor-pointer hover:bg-blue-100 flex-1">
@@ -594,9 +592,7 @@ export const Tomografia3DSection = ({
           <textarea
             value={formData?.otros || ''}
             onChange={(e) => onFormChange?.('otros', e.target.value)}
-            className={`w-full px-4 py-3 border-2 border-gray-300 rounded-lg resize-none focus:ring-2 ${
-              colorTheme === 'cyan' ? 'focus:ring-cyan-500 focus:border-cyan-500' : 'focus:ring-purple-500 focus:border-purple-500'
-            }`}
+            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
             rows={3}
             placeholder="Especifique otros estudios..."
             disabled={isReadOnly}

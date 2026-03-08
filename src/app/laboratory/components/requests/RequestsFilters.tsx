@@ -4,7 +4,7 @@ interface RequestsFiltersProps {
   searchTerm: string;
   statusFilter: string;
   typeFilter: string;
-  useCyanTheme: boolean;
+  useCyanTheme?: boolean;
   onSearchChange: (value: string) => void;
   onStatusChange: (value: string) => void;
   onTypeChange: (value: string) => void;
@@ -14,7 +14,6 @@ export const RequestsFilters = ({
   searchTerm,
   statusFilter,
   typeFilter,
-  useCyanTheme,
   onSearchChange,
   onStatusChange,
   onTypeChange
@@ -28,7 +27,7 @@ export const RequestsFilters = ({
           placeholder="Buscar por paciente, doctor o tipo de estudio..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className={`w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent ${useCyanTheme ? 'focus:ring-cyan-500' : 'focus:ring-purple-500'}`}
+          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent focus:ring-panocef-primary"
         />
       </div>
 
@@ -36,7 +35,7 @@ export const RequestsFilters = ({
         <select
           value={statusFilter}
           onChange={(e) => onStatusChange(e.target.value)}
-          className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent ${useCyanTheme ? 'focus:ring-cyan-500' : 'focus:ring-purple-500'}`}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent focus:ring-panocef-primary"
         >
           <option value="all">Todos los estados</option>
           <option value="pending">Pendientes</option>
@@ -49,7 +48,7 @@ export const RequestsFilters = ({
         <select
           value={typeFilter}
           onChange={(e) => onTypeChange(e.target.value)}
-          className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent ${useCyanTheme ? 'focus:ring-cyan-500' : 'focus:ring-purple-500'}`}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent focus:ring-panocef-primary"
         >
           <option value="all">Todos los tipos</option>
           <option value="rayos_x">Rayos X</option>

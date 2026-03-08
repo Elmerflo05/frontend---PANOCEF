@@ -98,16 +98,16 @@ export const DoctorSelectorWrapper = ({
 
   const themeColors = {
     cyan: {
-      bg: 'bg-cyan-50',
-      border: 'border-cyan-200',
-      focus: 'focus:ring-cyan-500 focus:border-cyan-500',
-      icon: 'text-cyan-600'
+      bg: 'bg-panocef-light',
+      border: 'border-panocef-secondary',
+      focus: 'focus:ring-panocef-primary focus:border-panocef-primary',
+      icon: 'text-panocef-primary'
     },
     purple: {
-      bg: 'bg-purple-50',
-      border: 'border-purple-200',
-      focus: 'focus:ring-purple-500 focus:border-purple-500',
-      icon: 'text-purple-600'
+      bg: 'bg-panocef-light',
+      border: 'border-panocef-secondary',
+      focus: 'focus:ring-panocef-primary focus:border-panocef-primary',
+      icon: 'text-panocef-primary'
     }
   };
 

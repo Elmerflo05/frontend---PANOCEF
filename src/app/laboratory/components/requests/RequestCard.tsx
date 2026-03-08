@@ -10,7 +10,7 @@ interface ImagingRequestWithDetails extends Appointment {
 
 interface RequestCardProps {
   request: ImagingRequestWithDetails;
-  useCyanTheme: boolean;
+  useCyanTheme?: boolean;
   userRole?: string;
   formatRadiographyInfo: (data: any) => any[];
   getPriorityColor: (date: Date) => string;
@@ -23,7 +23,6 @@ interface RequestCardProps {
 
 export const RequestCard = ({
   request,
-  useCyanTheme,
   userRole,
   formatRadiographyInfo,
   getPriorityColor,
@@ -33,8 +32,8 @@ export const RequestCard = ({
   onUploadResults,
   onViewResults
 }: RequestCardProps) => {
-  const IMAGING_STUDY_TYPES = getImagingStudyTypes(useCyanTheme);
-  const STUDY_STATUS = getStudyStatus(useCyanTheme);
+  const IMAGING_STUDY_TYPES = getImagingStudyTypes();
+  const STUDY_STATUS = getStudyStatus();
 
   const studyType = IMAGING_STUDY_TYPES[request.imagingStudy?.studyType as keyof typeof IMAGING_STUDY_TYPES];
   const studyStatus = STUDY_STATUS[request.imagingStudy?.studyStatus as keyof typeof STUDY_STATUS];
@@ -48,7 +47,7 @@ export const RequestCard = ({
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <div className="flex items-center gap-4 mb-3">
-            <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${useCyanTheme ? 'bg-cyan-100' : 'bg-purple-100'}`}>
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl bg-panocef-light">
               {studyType?.icon || '📷'}
             </div>
 
@@ -103,18 +102,18 @@ export const RequestCard = ({
           {/* Información de la solicitud de radiografía formateada */}
           {request.radiographyData && formatRadiographyInfo(request.radiographyData) && (
             <div className="mb-3 ml-16">
-              <div className={`bg-gradient-to-r rounded-lg p-4 border ${useCyanTheme ? 'from-cyan-50 to-teal-50 border-cyan-200' : 'from-purple-50 to-indigo-50 border-purple-200'}`}>
+              <div className="bg-gradient-to-r from-panocef-light to-blue-50 rounded-lg p-4 border border-panocef-secondary">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {formatRadiographyInfo(request.radiographyData)?.map((section: any, idx) => (
                     <div key={idx} className={section.items.length > 3 || section.dientes ? 'md:col-span-2' : ''}>
-                      <h4 className={`text-sm font-semibold mb-2 ${useCyanTheme ? 'text-cyan-900' : 'text-purple-900'}`}>{section.title}</h4>
+                      <h4 className="text-sm font-semibold mb-2 text-panocef-dark">{section.title}</h4>
 
                       {/* Items de texto */}
                       {section.items.length > 0 && (
                         <ul className="space-y-1 mb-3">
                           {section.items.map((item: string, itemIdx: number) => (
                             <li key={itemIdx} className="text-xs text-gray-700 flex items-start gap-2">
-                              <span className={`mt-0.5 ${useCyanTheme ? 'text-cyan-600' : 'text-purple-600'}`}>•</span>
+                              <span className="mt-0.5 text-panocef-primary">•</span>
                               <span>{item}</span>
                             </li>
                           ))}
@@ -134,7 +133,7 @@ export const RequestCard = ({
                                     key={diente}
                                     className={`px-2 py-1 text-xs rounded transition-colors ${
                                       section.dientes.superiores.includes(diente)
-                                        ? (useCyanTheme ? 'bg-cyan-600 text-white font-semibold border-2 border-cyan-700' : 'bg-purple-600 text-white font-semibold border-2 border-purple-700')
+                                        ? 'bg-panocef-primary text-white font-semibold border-2 border-panocef-dark'
                                         : 'bg-gray-100 text-gray-400 border border-gray-200'
                                     }`}
                                   >
@@ -155,7 +154,7 @@ export const RequestCard = ({
                                     key={diente}
                                     className={`px-2 py-1 text-xs rounded transition-colors ${
                                       section.dientes.inferiores.includes(diente)
-                                        ? (useCyanTheme ? 'bg-cyan-600 text-white font-semibold border-2 border-cyan-700' : 'bg-purple-600 text-white font-semibold border-2 border-purple-700')
+                                        ? 'bg-panocef-primary text-white font-semibold border-2 border-panocef-dark'
                                         : 'bg-gray-100 text-gray-400 border border-gray-200'
                                     }`}
                                   >
@@ -178,7 +177,7 @@ export const RequestCard = ({
                                       key={diente}
                                       className={`px-2 py-1 text-xs rounded transition-colors ${
                                         section.dientes.temporales.includes(diente)
-                                          ? (useCyanTheme ? 'bg-cyan-600 text-white font-semibold border-2 border-cyan-700' : 'bg-purple-600 text-white font-semibold border-2 border-purple-700')
+                                          ? 'bg-panocef-primary text-white font-semibold border-2 border-panocef-dark'
                                           : 'bg-gray-100 text-gray-400 border border-gray-200'
                                       }`}
                                     >
@@ -193,7 +192,7 @@ export const RequestCard = ({
                                       key={diente}
                                       className={`px-2 py-1 text-xs rounded transition-colors ${
                                         section.dientes.temporales.includes(diente)
-                                          ? (useCyanTheme ? 'bg-cyan-600 text-white font-semibold border-2 border-cyan-700' : 'bg-purple-600 text-white font-semibold border-2 border-purple-700')
+                                          ? 'bg-panocef-primary text-white font-semibold border-2 border-panocef-dark'
                                           : 'bg-gray-100 text-gray-400 border border-gray-200'
                                       }`}
                                     >
@@ -236,7 +235,7 @@ export const RequestCard = ({
           <div className="flex items-center gap-2">
             <button
               onClick={onViewDetails}
-              className={`p-2 text-gray-600 rounded-lg transition-colors ${useCyanTheme ? 'hover:text-cyan-600 hover:bg-cyan-50' : 'hover:text-purple-600 hover:bg-purple-50'}`}
+              className="p-2 text-gray-600 rounded-lg transition-colors hover:text-panocef-primary hover:bg-panocef-light"
               title="Ver detalles"
             >
               <Eye className="w-4 h-4" />

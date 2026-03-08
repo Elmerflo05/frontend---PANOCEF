@@ -59,10 +59,10 @@ interface LabResult {
   report?: string; // Informe del técnico
 }
 
-const getImagingStudyTypes = (useCyanTheme: boolean) => ({
-  rayos_x: { label: 'Rayos X', color: useCyanTheme ? 'bg-cyan-100 text-cyan-800' : 'bg-blue-100 text-blue-800' },
-  panoramica: { label: 'Panorámica', color: useCyanTheme ? 'bg-cyan-100 text-cyan-800' : 'bg-purple-100 text-purple-800' },
-  tomografia: { label: 'Tomografía', color: useCyanTheme ? 'bg-teal-100 text-teal-800' : 'bg-indigo-100 text-indigo-800' },
+const getImagingStudyTypes = () => ({
+  rayos_x: { label: 'Rayos X', color: 'bg-panocef-light text-panocef-primary' },
+  panoramica: { label: 'Panorámica', color: 'bg-panocef-light text-panocef-primary' },
+  tomografia: { label: 'Tomografía', color: 'bg-panocef-light text-panocef-accent' },
   cefalometria: { label: 'Cefalometría', color: 'bg-pink-100 text-pink-800' },
   periapical: { label: 'Periapical', color: 'bg-green-100 text-green-800' },
   oclusal: { label: 'Oclusal', color: 'bg-yellow-100 text-yellow-800' }
@@ -95,9 +95,8 @@ const formatRadiographyType = (type?: string): string => {
 const Results = () => {
   const { user } = useAuth();
   const isExternalClient = user?.role === 'external_client';
-  const useCyanTheme = user?.role === 'imaging_technician' || user?.role === 'external_client';
 
-  const IMAGING_STUDY_TYPES = getImagingStudyTypes(useCyanTheme);
+  const IMAGING_STUDY_TYPES = getImagingStudyTypes();
 
   // Estados para clientes externos (solicitudes de radiografía)
   const [radiographyRequests, setRadiographyRequests] = useState<RadiographyRequest[]>([]);
@@ -548,8 +547,8 @@ const Results = () => {
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${useCyanTheme ? 'bg-cyan-100' : 'bg-blue-100'}`}>
-                <ImageIcon className={`w-6 h-6 ${useCyanTheme ? 'text-cyan-600' : 'text-blue-600'}`} />
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center bg-panocef-light`}>
+                <ImageIcon className={`w-6 h-6 text-panocef-primary`} />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">
@@ -564,7 +563,7 @@ const Results = () => {
             </div>
             <button
               onClick={loadResults}
-              className={`text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors ${useCyanTheme ? 'bg-cyan-600 hover:bg-cyan-700' : 'bg-blue-600 hover:bg-blue-700'}`}
+              className={`text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors bg-panocef-primary hover:bg-panocef-dark`}
             >
               <RefreshCw className="w-4 h-4" />
               Actualizar
@@ -580,14 +579,14 @@ const Results = () => {
                 placeholder="Buscar por paciente, DNI, doctor..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className={`w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent ${useCyanTheme ? 'focus:ring-cyan-500' : 'focus:ring-blue-500'}`}
+                className={`w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent focus:ring-panocef-primary`}
               />
             </div>
 
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className={`px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent ${useCyanTheme ? 'focus:ring-cyan-500' : 'focus:ring-blue-500'}`}
+              className={`px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent focus:ring-panocef-primary`}
             >
               <option value="all">Todos los estados</option>
               <option value="pending">Pendiente</option>
@@ -616,8 +615,8 @@ const Results = () => {
 
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
             <div className="flex items-center gap-3">
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${useCyanTheme ? 'bg-teal-100' : 'bg-blue-100'}`}>
-                <CheckCircle className={`w-5 h-5 ${useCyanTheme ? 'text-teal-600' : 'text-blue-600'}`} />
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center bg-panocef-light`}>
+                <CheckCircle className={`w-5 h-5 text-panocef-accent`} />
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-900">
@@ -676,8 +675,8 @@ const Results = () => {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-4 mb-3">
-                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${useCyanTheme ? 'bg-cyan-100' : 'bg-blue-100'}`}>
-                          <ImageIcon className={`w-6 h-6 ${useCyanTheme ? 'text-cyan-600' : 'text-blue-600'}`} />
+                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center bg-panocef-light`}>
+                          <ImageIcon className={`w-6 h-6 text-panocef-primary`} />
                         </div>
 
                         <div className="flex-1">
@@ -687,7 +686,7 @@ const Results = () => {
                             </h3>
                             {/* Badge para indicar si es solicitud externa o interna */}
                             {(request as any).source === 'external' ? (
-                              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-50 text-purple-700 border border-purple-200">
+                              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-panocef-light text-panocef-primary border border-panocef-secondary">
                                 Externa
                               </span>
                             ) : (
@@ -790,10 +789,10 @@ const Results = () => {
 
                           {/* Mensaje cuando el precio está pendiente */}
                           {request.status === 'pending' && !request.pricing?.finalPrice && (
-                            <div className={`mb-3 p-3 rounded-lg border ${useCyanTheme ? 'bg-cyan-50 border-cyan-200' : 'bg-blue-50 border-blue-200'}`}>
+                            <div className={`mb-3 p-3 rounded-lg border bg-panocef-light border-panocef-secondary`}>
                               <div className="flex items-center gap-2">
-                                <Clock className={`w-4 h-4 ${useCyanTheme ? 'text-cyan-600' : 'text-blue-600'}`} />
-                                <span className={`text-sm ${useCyanTheme ? 'text-cyan-800' : 'text-blue-800'}`}>
+                                <Clock className={`w-4 h-4 text-panocef-primary`} />
+                                <span className={`text-sm text-panocef-dark`}>
                                   El precio del servicio está siendo evaluado por nuestro equipo
                                 </span>
                               </div>
@@ -818,7 +817,7 @@ const Results = () => {
                       {hasResults ? (
                         <button
                           onClick={() => openViewResultsModal(request)}
-                          className={`px-4 py-2 text-white rounded-lg transition-colors flex items-center gap-2 ${useCyanTheme ? 'bg-cyan-600 hover:bg-cyan-700' : 'bg-blue-600 hover:bg-blue-700'}`}
+                          className={`px-4 py-2 text-white rounded-lg transition-colors flex items-center gap-2 bg-panocef-primary hover:bg-panocef-dark`}
                         >
                           <Eye className="w-4 h-4" />
                           Ver Resultados
@@ -960,8 +959,8 @@ const Results = () => {
 
         <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
           <div className="flex items-center gap-3">
-            <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${useCyanTheme ? 'bg-cyan-100' : 'bg-blue-100'}`}>
-              <TestTube className={`w-5 h-5 ${useCyanTheme ? 'text-cyan-600' : 'text-blue-600'}`} />
+            <div className={`w-10 h-10 rounded-lg flex items-center justify-center bg-panocef-light`}>
+              <TestTube className={`w-5 h-5 text-panocef-primary`} />
             </div>
             <div>
               <p className="text-2xl font-bold text-gray-900">
@@ -1068,7 +1067,7 @@ const Results = () => {
                   <div className="flex items-center gap-2 ml-4">
                     <button
                       onClick={() => openDetailModal(result)}
-                      className={`p-2 text-gray-600 rounded-lg transition-colors ${useCyanTheme ? 'hover:text-cyan-600 hover:bg-cyan-50' : 'hover:text-blue-600 hover:bg-blue-50'}`}
+                      className={`p-2 text-gray-600 rounded-lg transition-colors hover:text-panocef-primary hover:bg-panocef-light`}
                       title="Ver detalles"
                     >
                       <Eye className="w-4 h-4" />
@@ -1076,7 +1075,7 @@ const Results = () => {
                     <button className="p-2 text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors" title="Descargar">
                       <Download className="w-4 h-4" />
                     </button>
-                    <button className={`p-2 text-gray-600 rounded-lg transition-colors ${useCyanTheme ? 'hover:text-cyan-600 hover:bg-cyan-50' : 'hover:text-purple-600 hover:bg-purple-50'}`} title="Compartir">
+                    <button className={`p-2 text-gray-600 rounded-lg transition-colors hover:text-panocef-primary hover:bg-panocef-light`} title="Compartir">
                       <Share className="w-4 h-4" />
                     </button>
                     <button className="p-2 text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-colors" title="Imprimir">
@@ -1164,7 +1163,7 @@ const Results = () => {
 
               <div>
                 <h3 className="font-semibold text-gray-900 mb-3">Conclusión</h3>
-                <p className={`text-gray-700 p-4 rounded-lg ${useCyanTheme ? 'bg-cyan-50' : 'bg-blue-50'}`}>{selectedResult.conclusion}</p>
+                <p className={`text-gray-700 p-4 rounded-lg bg-panocef-light`}>{selectedResult.conclusion}</p>
               </div>
 
               <div>
@@ -1192,15 +1191,15 @@ const Results = () => {
                         key={index}
                         className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors"
                       >
-                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${useCyanTheme ? 'bg-cyan-100' : 'bg-blue-100'}`}>
-                          <FileText className={`w-5 h-5 ${useCyanTheme ? 'text-cyan-600' : 'text-blue-600'}`} />
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center bg-panocef-light`}>
+                          <FileText className={`w-5 h-5 text-panocef-primary`} />
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-gray-900 truncate">{attachment}</p>
                           <p className="text-xs text-gray-500">Archivo adjunto</p>
                         </div>
                         <button
-                          className={`p-2 rounded-lg transition-colors ${useCyanTheme ? 'text-cyan-600 hover:text-cyan-700 hover:bg-cyan-50' : 'text-blue-600 hover:text-blue-700 hover:bg-blue-50'}`}
+                          className={`p-2 rounded-lg transition-colors text-panocef-primary hover:text-panocef-dark hover:bg-panocef-light`}
                           title="Descargar"
                         >
                           <Download className="w-4 h-4" />

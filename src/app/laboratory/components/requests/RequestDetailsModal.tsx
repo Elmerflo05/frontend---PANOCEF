@@ -97,7 +97,7 @@ interface RequestDetailsModalProps {
   request: ImagingRequestWithDetails;
   IMAGING_STUDY_TYPES: any;
   STUDY_STATUS: any;
-  useCyanTheme: boolean;
+  useCyanTheme?: boolean;
   onClose: () => void;
   userRole?: string;
   onCounterOffer?: (requestId: number, counterOfferPrice: number) => Promise<void>;
@@ -134,11 +134,11 @@ const TOMO_CATEGORIES_ORDER = [
 ];
 
 const TOMO_CATEGORIES_CONFIG: Record<string, { title: string; bgColor: string; borderColor: string; textColor: string; chipBg: string }> = {
-  tipoEntrega: { title: 'TIPO DE ENTREGA', bgColor: 'bg-purple-50', borderColor: 'border-purple-200', textColor: 'text-purple-700', chipBg: 'bg-purple-100' },
+  tipoEntrega: { title: 'TIPO DE ENTREGA', bgColor: 'bg-panocef-light', borderColor: 'border-panocef-secondary', textColor: 'text-panocef-primary', chipBg: 'bg-panocef-light' },
   campoPequeno: { title: 'CAMPO PEQUEÑO', bgColor: 'bg-green-50', borderColor: 'border-green-200', textColor: 'text-green-700', chipBg: 'bg-green-100' },
   campoMediano: { title: 'CAMPO MEDIANO', bgColor: 'bg-yellow-50', borderColor: 'border-yellow-200', textColor: 'text-yellow-700', chipBg: 'bg-yellow-100' },
   campoGrande: { title: 'CAMPO MEDIANO/GRANDE', bgColor: 'bg-orange-50', borderColor: 'border-orange-200', textColor: 'text-orange-700', chipBg: 'bg-orange-100' },
-  ortodoncia: { title: 'ORTODONCIA', bgColor: 'bg-indigo-50', borderColor: 'border-indigo-200', textColor: 'text-indigo-700', chipBg: 'bg-indigo-100' },
+  ortodoncia: { title: 'ORTODONCIA', bgColor: 'bg-panocef-light', borderColor: 'border-panocef-secondary', textColor: 'text-panocef-primary', chipBg: 'bg-panocef-light' },
   otrasOpciones: { title: 'OTRAS OPCIONES', bgColor: 'bg-blue-50', borderColor: 'border-blue-200', textColor: 'text-blue-700', chipBg: 'bg-blue-100' },
   otros: { title: 'OTROS', bgColor: 'bg-gray-50', borderColor: 'border-gray-200', textColor: 'text-gray-700', chipBg: 'bg-gray-100' }
 };
@@ -159,10 +159,10 @@ const RADIO_CATEGORIES_ORDER = [
 const RADIO_CATEGORIES_CONFIG: Record<string, { title: string; bgColor: string; borderColor: string; textColor: string; chipBg: string }> = {
   periapical: { title: 'INTRAORALES - PERIAPICAL', bgColor: 'bg-pink-50', borderColor: 'border-pink-200', textColor: 'text-pink-700', chipBg: 'bg-pink-100' },
   bitewing: { title: 'BITEWING', bgColor: 'bg-blue-50', borderColor: 'border-blue-200', textColor: 'text-blue-700', chipBg: 'bg-blue-100' },
-  oclusal: { title: 'OCLUSAL', bgColor: 'bg-purple-50', borderColor: 'border-purple-200', textColor: 'text-purple-700', chipBg: 'bg-purple-100' },
-  otrasIntraorales: { title: 'OTRAS INTRAORALES', bgColor: 'bg-cyan-50', borderColor: 'border-cyan-200', textColor: 'text-cyan-700', chipBg: 'bg-cyan-100' },
+  oclusal: { title: 'OCLUSAL', bgColor: 'bg-panocef-light', borderColor: 'border-panocef-secondary', textColor: 'text-panocef-primary', chipBg: 'bg-panocef-light' },
+  otrasIntraorales: { title: 'OTRAS INTRAORALES', bgColor: 'bg-panocef-light', borderColor: 'border-panocef-secondary', textColor: 'text-panocef-primary', chipBg: 'bg-panocef-light' },
   extraorales: { title: 'EXTRAORALES', bgColor: 'bg-green-50', borderColor: 'border-green-200', textColor: 'text-green-700', chipBg: 'bg-green-100' },
-  asesoriaOrtodoncia: { title: 'ASESORÍA ORTODONCIA', bgColor: 'bg-violet-50', borderColor: 'border-violet-200', textColor: 'text-violet-700', chipBg: 'bg-violet-100' },
+  asesoriaOrtodoncia: { title: 'ASESORÍA ORTODONCIA', bgColor: 'bg-panocef-light', borderColor: 'border-panocef-secondary', textColor: 'text-panocef-primary', chipBg: 'bg-panocef-light' },
   serviciosAdicionales: { title: 'SERVICIOS ADICIONALES', bgColor: 'bg-amber-50', borderColor: 'border-amber-200', textColor: 'text-amber-700', chipBg: 'bg-amber-100' },
   analisisCefalometricos: { title: 'ANÁLISIS CEFALOMÉTRICOS', bgColor: 'bg-rose-50', borderColor: 'border-rose-200', textColor: 'text-rose-700', chipBg: 'bg-rose-100' },
   otros: { title: 'OTROS', bgColor: 'bg-gray-50', borderColor: 'border-gray-200', textColor: 'text-gray-700', chipBg: 'bg-gray-100' }
@@ -523,10 +523,10 @@ export const RequestDetailsModal = ({
       const contentWidth = pdfWidth - (margin * 2);
       let y = margin;
 
-      // Colores del tema cyan/teal
-      const cyanDark: [number, number, number] = [0, 128, 128];
-      const cyanLight: [number, number, number] = [0, 150, 150];
-      const tealBg: [number, number, number] = [240, 253, 250];
+      // Colores del tema PanoCef
+      const cyanDark: [number, number, number] = [31, 67, 145]; // panocef-primary #1F4391
+      const cyanLight: [number, number, number] = [47, 64, 147]; // panocef-accent #2F4093
+      const tealBg: [number, number, number] = [244, 252, 253]; // panocef-light #F4FCFD
       const white: [number, number, number] = [255, 255, 255];
       const darkText: [number, number, number] = [31, 41, 55];
       const grayText: [number, number, number] = [107, 114, 128];
@@ -534,15 +534,15 @@ export const RequestDetailsModal = ({
 
       // Colores para categorías
       const colors = {
-        purple: { bg: [243, 232, 255] as [number, number, number], border: [192, 132, 252] as [number, number, number], text: [107, 33, 168] as [number, number, number] },
+        purple: { bg: [244, 252, 253] as [number, number, number], border: [148, 163, 211] as [number, number, number], text: [31, 67, 145] as [number, number, number] },
         green: { bg: [220, 252, 231] as [number, number, number], border: [74, 222, 128] as [number, number, number], text: [21, 128, 61] as [number, number, number] },
         yellow: { bg: [254, 249, 195] as [number, number, number], border: [250, 204, 21] as [number, number, number], text: [161, 98, 7] as [number, number, number] },
         orange: { bg: [255, 237, 213] as [number, number, number], border: [251, 146, 60] as [number, number, number], text: [194, 65, 12] as [number, number, number] },
-        indigo: { bg: [224, 231, 255] as [number, number, number], border: [129, 140, 248] as [number, number, number], text: [67, 56, 202] as [number, number, number] },
+        indigo: { bg: [244, 252, 253] as [number, number, number], border: [148, 163, 211] as [number, number, number], text: [31, 67, 145] as [number, number, number] },
         blue: { bg: [219, 234, 254] as [number, number, number], border: [96, 165, 250] as [number, number, number], text: [29, 78, 216] as [number, number, number] },
         pink: { bg: [252, 231, 243] as [number, number, number], border: [244, 114, 182] as [number, number, number], text: [190, 24, 93] as [number, number, number] },
-        cyan: { bg: [207, 250, 254] as [number, number, number], border: [34, 211, 238] as [number, number, number], text: [14, 116, 144] as [number, number, number] },
-        teal: { bg: [204, 251, 241] as [number, number, number], border: [45, 212, 191] as [number, number, number], text: [15, 118, 110] as [number, number, number] },
+        cyan: { bg: [244, 252, 253] as [number, number, number], border: [148, 163, 211] as [number, number, number], text: [31, 67, 145] as [number, number, number] },
+        teal: { bg: [244, 252, 253] as [number, number, number], border: [148, 163, 211] as [number, number, number], text: [47, 64, 147] as [number, number, number] },
         violet: { bg: [237, 233, 254] as [number, number, number], border: [167, 139, 250] as [number, number, number], text: [109, 40, 217] as [number, number, number] },
         amber: { bg: [254, 243, 199] as [number, number, number], border: [251, 191, 36] as [number, number, number], text: [180, 83, 9] as [number, number, number] },
         rose: { bg: [255, 228, 230] as [number, number, number], border: [251, 113, 133] as [number, number, number], text: [190, 18, 60] as [number, number, number] },
@@ -1081,9 +1081,9 @@ export const RequestDetailsModal = ({
     </div>
   );
 
-  const headerBg = useCyanTheme ? 'bg-gradient-to-r from-cyan-600 to-teal-600' : 'bg-gradient-to-r from-purple-600 to-indigo-600';
-  const accentColor = useCyanTheme ? 'text-cyan-600' : 'text-purple-600';
-  const accentBg = useCyanTheme ? 'bg-cyan-50 border-cyan-200' : 'bg-purple-50 border-purple-200';
+  const headerBg = 'bg-gradient-to-r from-panocef-primary to-panocef-accent';
+  const accentColor = 'text-panocef-primary';
+  const accentBg = 'bg-panocef-light border-panocef-secondary';
 
   const modalContent = (
     <div className="fixed inset-0 flex items-center justify-center p-4 z-[9999] bg-black/50 overflow-y-auto" onClick={onClose}>
@@ -1186,8 +1186,8 @@ export const RequestDetailsModal = ({
             {/* Datos del Doctor */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
               <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-100">
-                <div className="w-8 h-8 bg-teal-50 border border-teal-200 rounded-lg flex items-center justify-center">
-                  <Stethoscope className="w-4 h-4 text-teal-600" />
+                <div className="w-8 h-8 bg-panocef-light border border-panocef-secondary rounded-lg flex items-center justify-center">
+                  <Stethoscope className="w-4 h-4 text-panocef-primary" />
                 </div>
                 <h2 className="text-sm font-bold text-gray-900">Datos del Odontólogo</h2>
               </div>
@@ -1215,13 +1215,13 @@ export const RequestDetailsModal = ({
               {/* Tomografía 3D */}
               {hasTomografia && (
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <div className="px-4 py-3 bg-gradient-to-r from-cyan-50 to-teal-50 border-b border-gray-200">
+                  <div className="px-4 py-3 bg-gradient-to-r from-panocef-light to-blue-50 border-b border-gray-200">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <Scan className="w-5 h-5 text-cyan-600" />
+                        <Scan className="w-5 h-5 text-panocef-primary" />
                         <span className="font-bold text-gray-800">Tomografía 3D</span>
                       </div>
-                      <span className="text-xs font-medium text-cyan-600 bg-cyan-100 px-2 py-0.5 rounded-full">
+                      <span className="text-xs font-medium text-panocef-primary bg-panocef-light px-2 py-0.5 rounded-full">
                         {Object.values(tomografiaData).flat().length} items
                       </span>
                     </div>
@@ -1246,13 +1246,13 @@ export const RequestDetailsModal = ({
               {/* Radiografías */}
               {hasRadiografias && (
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <div className="px-4 py-3 bg-gradient-to-r from-teal-50 to-emerald-50 border-b border-gray-200">
+                  <div className="px-4 py-3 bg-gradient-to-r from-panocef-light to-blue-50 border-b border-gray-200">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <Radio className="w-5 h-5 text-teal-600" />
+                        <Radio className="w-5 h-5 text-panocef-accent" />
                         <span className="font-bold text-gray-800">Radiografías</span>
                       </div>
-                      <span className="text-xs font-medium text-teal-600 bg-teal-100 px-2 py-0.5 rounded-full">
+                      <span className="text-xs font-medium text-panocef-accent bg-panocef-light px-2 py-0.5 rounded-full">
                         {Object.values(radiografiasData).flat().length} items
                       </span>
                     </div>
@@ -1302,10 +1302,10 @@ export const RequestDetailsModal = ({
                       <div key={index} className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg text-sm">
                         <div className="flex items-center gap-2 min-w-0 flex-1">
                           <span className={`w-2 h-2 rounded-full flex-shrink-0 ${
-                            item.category === 'tomografia3D' ? 'bg-cyan-500' :
+                            item.category === 'tomografia3D' ? 'bg-panocef-primary' :
                             item.category === 'intraoral' ? 'bg-blue-500' :
-                            item.category === 'extraoral' ? 'bg-purple-500' :
-                            item.category === 'ortodoncias' ? 'bg-teal-500' :
+                            item.category === 'extraoral' ? 'bg-panocef-accent' :
+                            item.category === 'ortodoncias' ? 'bg-panocef-secondary' :
                             'bg-orange-500'
                           }`}></span>
                           <span className="text-gray-800 truncate">{displayName}</span>

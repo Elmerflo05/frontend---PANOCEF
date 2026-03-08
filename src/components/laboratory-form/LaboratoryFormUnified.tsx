@@ -39,12 +39,8 @@ export const LaboratoryFormUnified = ({
   loading = false,
   error
 }: LaboratoryFormProps) => {
-  // Determinar tema de colores basado en rol
-  const theme = colorTheme || (
-    userRole === 'imaging_technician' || userRole === 'external_client'
-      ? 'cyan'
-      : 'purple'
-  );
+  // Determinar tema de colores - siempre PanoCef (cyan/purple ya no se usan como diferenciador)
+  const theme = colorTheme || 'cyan';
 
   // En modo pricing, mostrar los precios con showPrices automáticamente
   const shouldShowPrices = mode === 'pricing' || showPrices;
@@ -73,7 +69,7 @@ export const LaboratoryFormUnified = ({
                 type="text"
                 value={patientData.nombres}
                 onChange={(e) => onPatientChange('nombres', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                 placeholder="Nombres del paciente"
                 disabled={mode === 'view'}
               />
@@ -86,7 +82,7 @@ export const LaboratoryFormUnified = ({
                 type="text"
                 value={patientData.apellidos}
                 onChange={(e) => onPatientChange('apellidos', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                 placeholder="Apellidos del paciente"
                 disabled={mode === 'view'}
               />
@@ -99,7 +95,7 @@ export const LaboratoryFormUnified = ({
                 type="text"
                 value={patientData.edad}
                 onChange={(e) => onPatientChange('edad', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                 placeholder="Edad"
                 disabled={mode === 'view'}
               />
@@ -112,7 +108,7 @@ export const LaboratoryFormUnified = ({
                 type="text"
                 value={patientData.dni}
                 onChange={(e) => onPatientChange('dni', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                 placeholder="Documento de identidad"
                 disabled={mode === 'view'}
               />
@@ -125,7 +121,7 @@ export const LaboratoryFormUnified = ({
                 type="tel"
                 value={patientData.telefono}
                 onChange={(e) => onPatientChange('telefono', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                 placeholder="Teléfono de contacto"
                 disabled={mode === 'view'}
               />
@@ -139,7 +135,7 @@ export const LaboratoryFormUnified = ({
                   type="email"
                   value={patientData.email}
                   onChange={(e) => onPatientChange('email', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                   placeholder="Correo electrónico"
                   disabled={mode === 'view'}
                 />
@@ -153,7 +149,7 @@ export const LaboratoryFormUnified = ({
                 <textarea
                   value={patientData.motivoConsulta}
                   onChange={(e) => onPatientChange('motivoConsulta', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 resize-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary resize-none"
                   rows={2}
                   placeholder="Motivo de la consulta"
                   disabled={mode === 'view'}
@@ -180,7 +176,7 @@ export const LaboratoryFormUnified = ({
       {/* Sección de Radiografías */}
       <RadiografiasSection
         mode={mode}
-        colorTheme={theme === 'cyan' ? 'teal' : theme}
+        colorTheme={theme}
         showPrices={shouldShowPrices && mode !== 'pricing'}
         formData={radiografiasData}
         onFormChange={onRadiografiasChange}
@@ -205,7 +201,7 @@ export const LaboratoryFormUnified = ({
                 type="text"
                 value={doctorData.nombres}
                 onChange={(e) => onDoctorChange('nombres', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                 placeholder="Nombres del doctor"
                 disabled={mode === 'view'}
               />
@@ -218,7 +214,7 @@ export const LaboratoryFormUnified = ({
                 type="text"
                 value={doctorData.apellidos}
                 onChange={(e) => onDoctorChange('apellidos', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                 placeholder="Apellidos del doctor"
                 disabled={mode === 'view'}
               />
@@ -231,7 +227,7 @@ export const LaboratoryFormUnified = ({
                 type="text"
                 value={doctorData.cop}
                 onChange={(e) => onDoctorChange('cop', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                 placeholder="Número de colegiatura"
                 disabled={mode === 'view'}
               />
@@ -245,7 +241,7 @@ export const LaboratoryFormUnified = ({
                   type="text"
                   value={doctorData.especialidad}
                   onChange={(e) => onDoctorChange('especialidad', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                   placeholder="Especialidad médica"
                   disabled={mode === 'view'}
                 />
@@ -260,7 +256,7 @@ export const LaboratoryFormUnified = ({
                   type="tel"
                   value={doctorData.telefono}
                   onChange={(e) => onDoctorChange('telefono', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                   placeholder="Teléfono de contacto"
                   disabled={mode === 'view'}
                 />
@@ -275,7 +271,7 @@ export const LaboratoryFormUnified = ({
                   type="email"
                   value={doctorData.email}
                   onChange={(e) => onDoctorChange('email', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                   placeholder="Correo electrónico"
                   disabled={mode === 'view'}
                 />
@@ -290,7 +286,7 @@ export const LaboratoryFormUnified = ({
                   type="text"
                   value={doctorData.direccion}
                   onChange={(e) => onDoctorChange('direccion', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-panocef-primary focus:border-panocef-primary"
                   placeholder="Dirección del consultorio"
                   disabled={mode === 'view'}
                 />
@@ -315,11 +311,7 @@ export const LaboratoryFormUnified = ({
             <button
               onClick={onSave}
               disabled={loading}
-              className={`px-6 py-2 rounded-lg text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
-                theme === 'cyan'
-                  ? 'bg-cyan-600 hover:bg-cyan-700'
-                  : 'bg-purple-600 hover:bg-purple-700'
-              }`}
+              className="px-6 py-2 rounded-lg text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed bg-panocef-primary hover:bg-panocef-dark"
             >
               {loading ? 'Guardando...' : 'Guardar Solicitud'}
             </button>

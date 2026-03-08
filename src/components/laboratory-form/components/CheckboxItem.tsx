@@ -13,28 +13,28 @@ interface CheckboxItemProps {
   disabled?: boolean;
   showPrice?: boolean;
   price?: number;
-  colorTheme?: 'cyan' | 'purple' | 'pink' | 'blue' | 'green' | 'yellow' | 'orange' | 'teal' | 'indigo';
+  colorTheme?: 'cyan' | 'purple' | 'pink' | 'blue' | 'green' | 'yellow' | 'orange' | 'teal' | 'indigo' | 'panocef';
   children?: React.ReactNode;
 }
 
 const themeColors = {
   cyan: {
-    checkbox: 'text-cyan-600 focus:ring-cyan-500',
-    border: 'border-cyan-200',
-    borderChecked: 'border-cyan-400',
-    hover: 'hover:bg-cyan-50',
-    bgChecked: 'bg-cyan-50',
-    textChecked: 'text-cyan-800',
-    iconBg: 'bg-cyan-500'
+    checkbox: 'text-panocef-primary focus:ring-panocef-primary',
+    border: 'border-panocef-secondary',
+    borderChecked: 'border-panocef-primary',
+    hover: 'hover:bg-panocef-light',
+    bgChecked: 'bg-panocef-light',
+    textChecked: 'text-panocef-dark',
+    iconBg: 'bg-panocef-primary'
   },
   purple: {
-    checkbox: 'text-purple-600 focus:ring-purple-500',
-    border: 'border-purple-200',
-    borderChecked: 'border-purple-400',
-    hover: 'hover:bg-purple-50',
-    bgChecked: 'bg-purple-50',
-    textChecked: 'text-purple-800',
-    iconBg: 'bg-purple-500'
+    checkbox: 'text-panocef-primary focus:ring-panocef-primary',
+    border: 'border-panocef-secondary',
+    borderChecked: 'border-panocef-primary',
+    hover: 'hover:bg-panocef-light',
+    bgChecked: 'bg-panocef-light',
+    textChecked: 'text-panocef-dark',
+    iconBg: 'bg-panocef-primary'
   },
   pink: {
     checkbox: 'text-pink-600 focus:ring-pink-500',
@@ -82,22 +82,31 @@ const themeColors = {
     iconBg: 'bg-orange-500'
   },
   teal: {
-    checkbox: 'text-teal-600 focus:ring-teal-500',
-    border: 'border-teal-200',
-    borderChecked: 'border-teal-400',
-    hover: 'hover:bg-teal-50',
-    bgChecked: 'bg-teal-50',
-    textChecked: 'text-teal-800',
-    iconBg: 'bg-teal-500'
+    checkbox: 'text-panocef-accent focus:ring-panocef-accent',
+    border: 'border-panocef-secondary',
+    borderChecked: 'border-panocef-accent',
+    hover: 'hover:bg-panocef-light',
+    bgChecked: 'bg-panocef-light',
+    textChecked: 'text-panocef-dark',
+    iconBg: 'bg-panocef-accent'
   },
   indigo: {
-    checkbox: 'text-indigo-600 focus:ring-indigo-500',
-    border: 'border-indigo-200',
-    borderChecked: 'border-indigo-400',
-    hover: 'hover:bg-indigo-50',
-    bgChecked: 'bg-indigo-50',
-    textChecked: 'text-indigo-800',
-    iconBg: 'bg-indigo-500'
+    checkbox: 'text-panocef-primary focus:ring-panocef-primary',
+    border: 'border-panocef-secondary',
+    borderChecked: 'border-panocef-primary',
+    hover: 'hover:bg-panocef-light',
+    bgChecked: 'bg-panocef-light',
+    textChecked: 'text-panocef-dark',
+    iconBg: 'bg-panocef-primary'
+  },
+  panocef: {
+    checkbox: 'text-panocef-primary focus:ring-panocef-primary',
+    border: 'border-panocef-secondary',
+    borderChecked: 'border-panocef-primary',
+    hover: 'hover:bg-panocef-light',
+    bgChecked: 'bg-panocef-light',
+    textChecked: 'text-panocef-dark',
+    iconBg: 'bg-panocef-primary'
   }
 };
 

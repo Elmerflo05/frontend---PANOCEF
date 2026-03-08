@@ -96,29 +96,26 @@ const LoginPage = () => {
           className="hidden space-y-8 lg:block"
         >
           <div>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="flex items-center justify-center w-12 h-12 bg-clinic-primary rounded-xl">
-                <TestTube className="text-white w-7 h-7" />
-              </div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                PanoCef
-              </h1>
-            </div>
+            <img
+              src="/GENESIS-PANOCEF-final-01.png"
+              alt="PanoCef 3D - Centro de Imágenes Dentomaxilofacial"
+              className="w-full max-w-md h-auto mb-6"
+            />
 
             <p className="text-xl leading-relaxed text-gray-600">
-              Centro de imágenes odontológicas. Plataforma moderna para la gestión
-              de estudios radiográficos y diagnóstico por imágenes.
+              Plataforma moderna para la gestión de estudios radiográficos
+              y diagnóstico por imágenes dentomaxilofaciales.
             </p>
           </div>
 
           <div className="space-y-4">
             <div className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-sm">
-              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-laboratory-primary/10">
-                <TestTube className="w-5 h-5 text-laboratory-primary" />
+              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-panocef-light">
+                <TestTube className="w-5 h-5 text-panocef-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900">PanoCef</h3>
-                <p className="text-sm text-gray-600">Centro de imágenes y diagnóstico radiográfico</p>
+                <h3 className="font-semibold text-gray-900">Radiografías y Tomografías 3D</h3>
+                <p className="text-sm text-gray-600">Solicita, gestiona y recibe resultados en línea</p>
               </div>
             </div>
           </div>
@@ -133,9 +130,11 @@ const LoginPage = () => {
         >
           <div className="p-8 bg-white border border-gray-100 shadow-xl rounded-2xl">
             <div className="mb-8 text-center">
-              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-clinic-primary to-laboratory-primary rounded-xl">
-                <LogIn className="w-8 h-8 text-white" />
-              </div>
+              <img
+                src="/GENESIS-PANOCEF-final-01.png"
+                alt="PanoCef 3D"
+                className="w-48 h-auto mx-auto mb-4"
+              />
               <h2 className="mb-2 text-2xl font-bold text-gray-900">Iniciar Sesión</h2>
               <p className="text-gray-600">Accede a tu cuenta para continuar</p>
             </div>
@@ -210,7 +209,7 @@ const LoginPage = () => {
               <button
                 type="button"
                 onClick={() => setShowExternalClientRegister(true)}
-                className="flex items-center justify-center w-full gap-2 py-3 font-semibold text-white transition-colors bg-purple-600 rounded-lg hover:bg-purple-700"
+                className="flex items-center justify-center w-full gap-2 py-3 font-semibold text-white transition-colors bg-panocef-primary rounded-lg hover:bg-panocef-dark"
               >
                 <Briefcase className="w-5 h-5" />
                 Registrarse como Cliente Externo

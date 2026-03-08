@@ -160,7 +160,7 @@ export const ViewResultsModal = ({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-cyan-600 to-teal-600 px-6 py-4 text-white">
+        <div className="bg-gradient-to-r from-panocef-primary to-panocef-accent px-6 py-4 text-white">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
@@ -199,7 +199,7 @@ export const ViewResultsModal = ({
               {/* Enlaces Externos */}
               {externalLinks.length > 0 && (
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <div className="px-4 py-3 bg-gradient-to-r from-blue-50 to-cyan-50 border-b border-gray-200">
+                  <div className="px-4 py-3 bg-gradient-to-r from-panocef-light to-blue-50 border-b border-gray-200">
                     <div className="flex items-center gap-2">
                       <ExternalLink className="w-5 h-5 text-blue-600" />
                       <span className="font-bold text-gray-800">Enlaces de Descarga ({externalLinks.length})</span>
@@ -238,9 +238,9 @@ export const ViewResultsModal = ({
               {/* Imágenes */}
               {images.length > 0 && (
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <div className="px-4 py-3 bg-gradient-to-r from-purple-50 to-pink-50 border-b border-gray-200">
+                  <div className="px-4 py-3 bg-gradient-to-r from-panocef-light to-blue-50 border-b border-gray-200">
                     <div className="flex items-center gap-2">
-                      <FileImage className="w-5 h-5 text-purple-600" />
+                      <FileImage className="w-5 h-5 text-panocef-primary" />
                       <span className="font-bold text-gray-800">Imágenes del Estudio ({images.length})</span>
                     </div>
                   </div>
@@ -254,7 +254,7 @@ export const ViewResultsModal = ({
                         return (
                           <div
                             key={index}
-                            className="border border-gray-200 rounded-lg p-2 hover:border-purple-400 transition-colors"
+                            className="border border-gray-200 rounded-lg p-2 hover:border-panocef-secondary transition-colors"
                           >
                             {isImage(image) ? (
                               <img
@@ -270,7 +270,7 @@ export const ViewResultsModal = ({
                             )}
                             <button
                               onClick={() => downloadFile(image, fileName)}
-                              className="w-full flex items-center justify-center gap-1 bg-purple-600 text-white px-2 py-1 rounded hover:bg-purple-700 transition-colors text-xs"
+                              className="w-full flex items-center justify-center gap-1 bg-panocef-primary text-white px-2 py-1 rounded hover:bg-panocef-dark transition-colors text-xs"
                             >
                               <Download className="w-3 h-3" />
                               Descargar
@@ -333,9 +333,9 @@ export const ViewResultsModal = ({
               {/* Opción de marcar como entregada */}
               {canMarkAsDelivered && status === 'completed' && (
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <div className="px-4 py-3 bg-gradient-to-r from-cyan-50 to-teal-50 border-b border-gray-200">
+                  <div className="px-4 py-3 bg-gradient-to-r from-panocef-light to-blue-50 border-b border-gray-200">
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="w-5 h-5 text-cyan-600" />
+                      <CheckCircle className="w-5 h-5 text-panocef-primary" />
                       <span className="font-bold text-gray-800">Confirmar Recepción</span>
                     </div>
                   </div>
@@ -349,7 +349,7 @@ export const ViewResultsModal = ({
                     <button
                       onClick={handleMarkAsDelivered}
                       disabled={isMarkingAsDelivered}
-                      className="bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="bg-panocef-primary text-white px-4 py-2 rounded-lg hover:bg-panocef-dark transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isMarkingAsDelivered ? 'Confirmando...' : 'Confirmar Recepción'}
                     </button>

@@ -283,7 +283,7 @@ export interface LaboratoryFormProps {
   showPatientSection?: boolean;
   showDoctorSection?: boolean;
   showPrices?: boolean;
-  colorTheme?: 'cyan' | 'purple';
+  colorTheme?: 'cyan' | 'purple' | 'panocef';
 
   // Datos del formulario
   tomografiaData?: Tomografia3DFormData;

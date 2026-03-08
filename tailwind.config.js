@@ -7,17 +7,25 @@ export default {
   theme: {
     extend: {
       colors: {
+        panocef: {
+          primary: '#1F4391',
+          secondary: '#2F4093',
+          accent: '#2AD2C1',
+          light: '#F4FCFD',
+          dark: '#1D2864',
+        },
+        // Aliases para compatibilidad con clases existentes
         clinic: {
-          primary: '#0891b2',
-          secondary: '#06b6d4',
-          accent: '#22d3ee',
-          light: '#ecfeff',
-          dark: '#164e63',
+          primary: '#1F4391',
+          secondary: '#2F4093',
+          accent: '#2AD2C1',
+          light: '#F4FCFD',
+          dark: '#1D2864',
         },
         laboratory: {
-          primary: '#7c3aed',
-          secondary: '#8b5cf6',
-          accent: '#a78bfa',
+          primary: '#2F4093',
+          secondary: '#2AD2C1',
+          accent: '#94A3D3',
         },
       },
       animation: {
@@ -38,4 +46,3 @@ export default {
   },
   plugins: [],
 }
-

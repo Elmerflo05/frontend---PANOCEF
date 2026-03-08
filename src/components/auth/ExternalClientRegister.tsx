@@ -151,7 +151,7 @@ const ExternalClientRegister = ({ onBackToLogin, onRegisterSuccess }: ExternalCl
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-white to-teal-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-panocef-light via-white to-blue-50 flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -162,8 +162,8 @@ const ExternalClientRegister = ({ onBackToLogin, onRegisterSuccess }: ExternalCl
           {/* Header */}
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center">
-                <UserPlus className="w-8 h-8 text-cyan-600" />
+              <div className="w-16 h-16 bg-panocef-light rounded-full flex items-center justify-center">
+                <UserPlus className="w-8 h-8 text-panocef-primary" />
               </div>
             </div>
             <h1 className="text-2xl font-bold text-gray-900">Registro de Odontólogo Externo</h1>
@@ -173,8 +173,8 @@ const ExternalClientRegister = ({ onBackToLogin, onRegisterSuccess }: ExternalCl
           </div>
 
           {/* Info Alert */}
-          <div className="bg-cyan-50 border border-cyan-200 rounded-lg p-3 mb-6">
-            <div className="text-sm text-cyan-800">
+          <div className="bg-panocef-light border border-panocef-secondary rounded-lg p-3 mb-6">
+            <div className="text-sm text-panocef-dark">
               <p className="font-semibold mb-1">Información importante:</p>
               <p className="text-xs">
                 Este registro te permitirá enviar solicitudes de estudios radiológicos y tomografías para tus pacientes.
@@ -195,7 +195,7 @@ const ExternalClientRegister = ({ onBackToLogin, onRegisterSuccess }: ExternalCl
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-panocef-primary focus:border-transparent"
                   placeholder="Juan Carlos"
                   required
                 />
@@ -210,7 +210,7 @@ const ExternalClientRegister = ({ onBackToLogin, onRegisterSuccess }: ExternalCl
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-panocef-primary focus:border-transparent"
                   placeholder="Pérez González"
                   required
                 />
@@ -227,7 +227,7 @@ const ExternalClientRegister = ({ onBackToLogin, onRegisterSuccess }: ExternalCl
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-panocef-primary focus:border-transparent"
                 placeholder="ejemplo@email.com"
                 required
               />
@@ -243,7 +243,7 @@ const ExternalClientRegister = ({ onBackToLogin, onRegisterSuccess }: ExternalCl
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-panocef-primary focus:border-transparent"
                 placeholder="999 999 999"
                 maxLength={11}
               />
@@ -259,7 +259,7 @@ const ExternalClientRegister = ({ onBackToLogin, onRegisterSuccess }: ExternalCl
                 name="cop"
                 value={formData.cop}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-panocef-primary focus:border-transparent"
                 placeholder="Ej: 12345"
                 required
               />
@@ -276,7 +276,7 @@ const ExternalClientRegister = ({ onBackToLogin, onRegisterSuccess }: ExternalCl
                 name="specialty"
                 value={formData.specialty}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-panocef-primary focus:border-transparent"
                 placeholder="Ej: Ortodoncia, Endodoncia, Cirugía Oral..."
               />
               <p className="text-xs text-gray-500 mt-1">Ingresa tu especialidad (opcional)</p>
@@ -292,7 +292,7 @@ const ExternalClientRegister = ({ onBackToLogin, onRegisterSuccess }: ExternalCl
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-panocef-primary focus:border-transparent"
                   placeholder="Mínimo 6 caracteres"
                   minLength={6}
                   required
@@ -317,7 +317,7 @@ const ExternalClientRegister = ({ onBackToLogin, onRegisterSuccess }: ExternalCl
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-panocef-primary focus:border-transparent"
                   placeholder="Confirma tu contraseña"
                   minLength={6}
                   required
@@ -335,7 +335,7 @@ const ExternalClientRegister = ({ onBackToLogin, onRegisterSuccess }: ExternalCl
             <div className="pt-4">
               <button
                 type="submit"
-                className="w-full bg-cyan-600 text-white py-2 px-4 rounded-lg hover:bg-cyan-700 transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-panocef-primary text-white py-2 px-4 rounded-lg hover:bg-panocef-dark transition-colors flex items-center justify-center gap-2"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -354,7 +354,7 @@ const ExternalClientRegister = ({ onBackToLogin, onRegisterSuccess }: ExternalCl
           <div className="mt-6 text-center">
             <button
               onClick={onBackToLogin}
-              className="text-cyan-600 hover:text-cyan-800 text-sm flex items-center justify-center gap-1 mx-auto"
+              className="text-panocef-primary hover:text-panocef-dark text-sm flex items-center justify-center gap-1 mx-auto"
             >
               <ArrowLeft className="w-4 h-4" />
               Volver al inicio de sesión

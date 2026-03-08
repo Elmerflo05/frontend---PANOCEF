@@ -68,8 +68,7 @@ export const NewRequestModal = ({ isOpen, onClose, onSuccess, initialDate }: New
   const { pricing: tomografiaPricing } = useTomografia3DPricing();
   const { pricing: radiografiasPricing } = useRadiografiasPricing();
 
-  // Detectar si debe usar tema cyan (imaging_technician o external_client)
-  const useCyanTheme = user?.role === 'imaging_technician' || user?.role === 'external_client';
+  // PanoCef branding - unified theme
 
   // Actualizar fecha cuando cambie initialDate
   useState(() => {
@@ -481,7 +480,7 @@ export const NewRequestModal = ({ isOpen, onClose, onSuccess, initialDate }: New
           className="bg-white rounded-xl shadow-2xl max-w-7xl w-full max-h-[95vh] overflow-hidden flex flex-col relative z-10"
         >
           {/* Header */}
-          <div className={`bg-gradient-to-r px-6 py-4 flex items-center justify-between ${useCyanTheme ? 'from-cyan-500 to-teal-600' : 'from-purple-600 to-indigo-600'}`}>
+          <div className="bg-gradient-to-r from-panocef-primary to-panocef-accent px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
                 <FileImage className="w-6 h-6 text-white" />
@@ -490,7 +489,7 @@ export const NewRequestModal = ({ isOpen, onClose, onSuccess, initialDate }: New
                 <h2 className="text-xl font-bold text-white">
                   {form.currentStep === 1 ? 'Paso 1: Tomografía 3D' : 'Paso 2: Radiografías'}
                 </h2>
-                <p className={`text-sm ${useCyanTheme ? 'text-cyan-100' : 'text-purple-100'}`}>PanoCef - Centro de Imágenes Dentomaxilofacial</p>
+                <p className="text-sm text-panocef-light">PanoCef - Centro de Imágenes Dentomaxilofacial</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -509,7 +508,7 @@ export const NewRequestModal = ({ isOpen, onClose, onSuccess, initialDate }: New
           {/* Progress Bar */}
           <div className="h-1 bg-gray-200">
             <div
-              className={`h-full bg-gradient-to-r transition-all duration-300 ${useCyanTheme ? 'from-cyan-500 to-teal-600' : 'from-purple-600 to-indigo-600'}`}
+              className="h-full bg-gradient-to-r from-panocef-primary to-panocef-accent transition-all duration-300"
               style={{ width: `${(form.currentStep / 2) * 100}%` }}
             />
           </div>
@@ -529,7 +528,7 @@ export const NewRequestModal = ({ isOpen, onClose, onSuccess, initialDate }: New
                   pricing={tomografiaPricing}
                   showPrices={false}
                   showSelectors={user?.role !== 'external_client'}
-                  colorTheme={useCyanTheme ? 'cyan' : 'purple'}
+                  colorTheme="cyan"
                 />
 
                 {/* Preview del subtotal de Tomografía */}
@@ -537,18 +536,14 @@ export const NewRequestModal = ({ isOpen, onClose, onSuccess, initialDate }: New
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className={`mt-6 p-4 rounded-lg border-2 ${
-                      useCyanTheme
-                        ? 'bg-cyan-50 border-cyan-200'
-                        : 'bg-purple-50 border-purple-200'
-                    }`}
+                    className="mt-6 p-4 rounded-lg border-2 bg-panocef-light border-panocef-secondary"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <DollarSign className={`w-5 h-5 ${useCyanTheme ? 'text-cyan-600' : 'text-purple-600'}`} />
+                        <DollarSign className={`w-5 h-5 ${'text-panocef-primary'}`} />
                         <span className="font-medium text-gray-700">Subtotal Tomografía 3D:</span>
                       </div>
-                      <span className={`text-xl font-bold ${useCyanTheme ? 'text-cyan-600' : 'text-purple-600'}`}>
+                      <span className={`text-xl font-bold ${'text-panocef-primary'}`}>
                         {formatPrice(tomografiaSubtotal)}
                       </span>
                     </div>
@@ -568,7 +563,7 @@ export const NewRequestModal = ({ isOpen, onClose, onSuccess, initialDate }: New
                   showPrices={true}
                   priceBreakdown={priceBreakdown}
                   totalPrice={totalPrice}
-                  colorTheme={useCyanTheme ? 'cyan' : 'teal'}
+                  colorTheme="cyan"
                 />
               </div>
             )}
@@ -615,9 +610,7 @@ export const NewRequestModal = ({ isOpen, onClose, onSuccess, initialDate }: New
                   <button
                     type="submit"
                     className={`px-6 py-2 bg-gradient-to-r text-white rounded-lg transition-colors font-medium flex items-center gap-2 ${
-                      useCyanTheme
-                        ? 'from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700'
-                        : 'from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700'
+                      'from-panocef-primary to-panocef-accent hover:from-panocef-dark hover:to-panocef-primary'
                     }`}
                   >
                     Siguiente
@@ -640,11 +633,7 @@ export const NewRequestModal = ({ isOpen, onClose, onSuccess, initialDate }: New
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className={`px-6 py-2 bg-gradient-to-r text-white rounded-lg transition-colors font-medium flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${
-                        useCyanTheme
-                          ? 'from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700'
-                          : 'from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700'
-                      }`}
+                      className="px-6 py-2 bg-gradient-to-r from-panocef-primary to-panocef-accent hover:from-panocef-dark hover:to-panocef-primary text-white rounded-lg transition-colors font-medium flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <Save className="w-4 h-4" />
                       {isSubmitting ? 'Guardando...' : 'Enviar Solicitud'}

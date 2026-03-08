@@ -19,7 +19,7 @@ const PriceCatalog = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState<'tomografia' | 'radiografias'>('tomografia');
 
-  const useCyanTheme = user?.role === 'imaging_technician' || user?.role === 'external_client';
+  // PanoCef branding - always use navy blue theme
 
   // Filtrar precios según búsqueda
   const filterPrices = (prices: Record<string, number>, search: string) => {
@@ -55,12 +55,12 @@ const PriceCatalog = () => {
   }
 
   return (
-    <div className={`min-h-screen ${useCyanTheme ? 'bg-cyan-50' : 'bg-blue-50'}`}>
+    <div className="min-h-screen bg-panocef-light">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className={`${useCyanTheme ? 'bg-cyan-600' : 'bg-blue-600'} text-white px-6 py-6 shadow-md`}
+        className="bg-panocef-primary text-white px-6 py-6 shadow-md"
       >
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between">
@@ -114,9 +114,7 @@ const PriceCatalog = () => {
             onClick={() => setActiveTab('tomografia')}
             className={`flex-1 py-3 px-6 rounded-lg font-medium transition-colors ${
               activeTab === 'tomografia'
-                ? useCyanTheme
-                  ? 'bg-cyan-600 text-white'
-                  : 'bg-blue-600 text-white'
+                ? 'bg-panocef-primary text-white'
                 : 'bg-white text-gray-700 hover:bg-gray-50'
             }`}
           >
@@ -126,9 +124,7 @@ const PriceCatalog = () => {
             onClick={() => setActiveTab('radiografias')}
             className={`flex-1 py-3 px-6 rounded-lg font-medium transition-colors ${
               activeTab === 'radiografias'
-                ? useCyanTheme
-                  ? 'bg-cyan-600 text-white'
-                  : 'bg-blue-600 text-white'
+                ? 'bg-panocef-primary text-white'
                 : 'bg-white text-gray-700 hover:bg-gray-50'
             }`}
           >
@@ -145,7 +141,7 @@ const PriceCatalog = () => {
         >
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className={`${useCyanTheme ? 'bg-cyan-100' : 'bg-blue-100'}`}>
+              <thead className="bg-panocef-light">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
                     Estado
