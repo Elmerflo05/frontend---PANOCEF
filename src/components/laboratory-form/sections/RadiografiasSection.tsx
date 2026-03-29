@@ -15,7 +15,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { FileImage, Save, ChevronDown, ChevronUp, Check } from 'lucide-react';
+import { FileImage, Save, ChevronDown, ChevronUp, Check, DollarSign } from 'lucide-react';
 import { PriceInputGroup } from '../components/PriceInputGroup';
 import { CheckboxItem } from '../components/CheckboxItem';
 import { SubsectionTitle } from '../components/SubsectionTitle';
@@ -252,9 +252,10 @@ export const RadiografiasSection = ({
               />
             )}
             <span className={getLabelStyles()}>{label}</span>
-            {showPrices && priceField && pricing && (
-              <span className={`text-xs ml-2 ${isReadOnly && !isChecked ? 'text-gray-300' : 'text-gray-500'}`}>
-                S/{pricing[priceField]}
+            {showPrices && priceField && pricing && pricing[priceField] !== undefined && (
+              <span className={`flex items-center gap-1 text-sm ${isReadOnly && !isChecked ? 'text-gray-300' : 'text-gray-500'}`}>
+                <DollarSign className="w-3 h-3" />
+                {pricing[priceField].toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
             )}
           </label>

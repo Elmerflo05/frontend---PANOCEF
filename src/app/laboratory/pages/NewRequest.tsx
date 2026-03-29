@@ -109,8 +109,9 @@ const NewRequestPage = () => {
       try {
         setLoadingPrices(true);
         const allPricing = await laboratoryServicePricesApi.getAllPricing();
-        setTomografiaPricing(allPricing.tomografia3d);
-        setRadiografiasPricing(allPricing.radiografias);
+        // Merge con defaults para que campos sin fila en BD tengan valor
+        setTomografiaPricing({ ...DEFAULT_TOMOGRAFIA_PRICING, ...allPricing.tomografia3d });
+        setRadiografiasPricing({ ...DEFAULT_RADIOGRAFIAS_PRICING, ...allPricing.radiografias });
       } catch (err) {
         console.error('Error al cargar precios:', err);
         toast.error('Error al cargar precios. Usando valores por defecto.');
