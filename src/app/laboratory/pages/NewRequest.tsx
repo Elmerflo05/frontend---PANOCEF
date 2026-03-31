@@ -779,7 +779,39 @@ const NewRequestPage = () => {
   };
 
   const handleRadiografiasChange = (field: keyof RadiografiasFormData, value: any) => {
-    setRadiografiasData(prev => ({ ...prev, [field]: value }));
+    setRadiografiasData(prev => {
+      const updated = { ...prev, [field]: value };
+
+      // Cascada: al desmarcar un padre expandible, desmarcar sus hijos
+      if (!value) {
+        if (field === 'fotografias') {
+          updated.fotografiaIntraoral = false;
+          updated.fotografiaExtraoral = false;
+        }
+        if (field === 'extraoralCarpal') {
+          updated.carpalFishman = false;
+          updated.carpalTtw2 = false;
+        }
+        if (field === 'extraoralPosteriorAnterior') {
+          updated.posteriorAnteriorRicketts = false;
+        }
+        if (field === 'ortodonciaAlineadores') {
+          updated.alineadoresPlanificacion = false;
+          updated.alineadoresImpresion = false;
+        }
+        if (field === 'ortodonciaEscaneo') {
+          updated.escaneoIntraoral = false;
+          updated.escaneoIntraoralZocalo = false;
+          updated.escaneoIntraoralInforme = false;
+        }
+        if (field === 'ortodonciaImpresion') {
+          updated.modelosDigitalesConInforme = false;
+          updated.modelosDigitalesSinInforme = false;
+        }
+      }
+
+      return updated;
+    });
   };
 
   // Formatear DNI: solo números, máximo 8 dígitos
