@@ -1,4 +1,4 @@
-import { User, Calendar, Clock, Eye, Printer, DollarSign, Upload } from 'lucide-react';
+import { User, Calendar, Clock, Eye, Printer, DollarSign, Upload, Trash2 } from 'lucide-react';
 import type { Appointment } from '@/types';
 import { getImagingStudyTypes, getStudyStatus } from './constants';
 
@@ -7,6 +7,12 @@ interface ImagingRequestWithDetails extends Appointment {
   doctorName?: string;
   radiographyData?: any;
 }
+
+// Roles con permiso para eliminar solicitudes (el técnico descarta las equivocadas
+// que el doctor corrigió con una nueva). Se excluye al cliente externo.
+const DELETE_ALLOWED_ROLES = ['super_admin', 'admin', 'imaging_technician'];
+// Estado único en el que una solicitud puede ser eliminada (backend valida también).
+const DELETABLE_STATUS = 'pending';
 
 interface RequestCardProps {
   request: ImagingRequestWithDetails;
@@ -19,6 +25,7 @@ interface RequestCardProps {
   onSetPrice: () => void;
   onUploadResults: () => void;
   onViewResults: () => void;
+  onDelete?: () => void;
 }
 
 export const RequestCard = ({
@@ -30,7 +37,8 @@ export const RequestCard = ({
   onPrint,
   onSetPrice,
   onUploadResults,
-  onViewResults
+  onViewResults,
+  onDelete
 }: RequestCardProps) => {
   const IMAGING_STUDY_TYPES = getImagingStudyTypes();
   const STUDY_STATUS = getStudyStatus();
@@ -284,6 +292,22 @@ export const RequestCard = ({
                 <Eye className="w-4 h-4" />
               </button>
             )}
+
+            {/* Botón Eliminar - Solo si la solicitud está en estado pendiente y el rol tiene permiso.
+                Lógica: si el doctor envió una solicitud equivocada y luego mandó una corregida,
+                el técnico elimina la primera para evitar duplicidad. */}
+            {onDelete &&
+              userRole &&
+              DELETE_ALLOWED_ROLES.includes(userRole) &&
+              request.imagingStudy?.studyStatus === DELETABLE_STATUS && (
+                <button
+                  onClick={onDelete}
+                  className="p-2 text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors"
+                  title="Eliminar solicitud pendiente"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              )}
           </div>
 
           {/* Mostrar precio si está aprobado */}

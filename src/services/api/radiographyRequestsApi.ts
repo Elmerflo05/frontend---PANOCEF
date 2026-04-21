@@ -189,12 +189,12 @@ class RadiographyRequestsApiService {
   }
 
   /**
-   * Obtiene solicitud por consultation_id
+   * Obtiene TODAS las solicitudes activas por consultation_id.
    */
-  async getRequestByConsultation(consultationId: number): Promise<RadiographyRequestData | null> {
+  async getRequestsByConsultation(consultationId: number): Promise<RadiographyRequestData[]> {
     try {
-      const response = await this.getRequests({ consultation_id: consultationId, limit: 1 });
-      return response.data.length > 0 ? response.data[0] : null;
+      const response = await this.getRequests({ consultation_id: consultationId, limit: 100 });
+      return response.data;
     } catch (error) {
       throw error;
     }
