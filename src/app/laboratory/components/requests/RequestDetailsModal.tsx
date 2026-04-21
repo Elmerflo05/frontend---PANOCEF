@@ -34,6 +34,13 @@ import {
 import type { Appointment } from '@/types';
 import jsPDF from 'jspdf';
 import { toast } from 'sonner';
+import { useRadiografiasPricing } from '@/app/admin/pages/laboratory-services/hooks/useRadiografiasPricing';
+import { useTomografia3DPricing } from '@/app/admin/pages/laboratory-services/hooks/useTomografia3DPricing';
+import {
+  buildBreakdown,
+  computeBreakdownTotal,
+  getCategoryLabel as getBreakdownCategoryLabel
+} from '@/utils/pricing/breakdownBuilder';
 
 interface ImagingRequestWithDetails extends Appointment {
   patientName?: string;
@@ -186,6 +193,12 @@ export const RequestDetailsModal = ({
   const [counterOfferPrice, setCounterOfferPrice] = useState('');
   const [isSubmittingCounterOffer, setIsSubmittingCounterOffer] = useState(false);
 
+  // Hooks de precios vigentes (catálogo configurado por admin). Se usan como fuente
+  // para completar los items del breakdown cuando la solicitud fue guardada con un
+  // desglose parcial (por ejemplo, saves antiguos de DiagnosticPlanStep).
+  const { pricing: radiografiasPricing } = useRadiografiasPricing();
+  const { pricing: tomografiaPricing } = useTomografia3DPricing();
+
   if (!isOpen) return null;
 
   const radiographyData = request.radiographyData;
@@ -194,6 +207,23 @@ export const RequestDetailsModal = ({
   const tomografia3D = radiographyData?.tomografia3D;
   const radiografias = radiographyData?.radiografias;
   const pricing = radiographyData?.pricing;
+
+  // ÚNICA FUENTE DE VERDAD del desglose: mismo util que usa SetPriceModal.
+  // Combina los items guardados en pricing_data.breakdown con los regenerados
+  // desde request_data (tomografia3D + radiografias) usando los precios vigentes.
+  const unifiedBreakdown = buildBreakdown(
+    pricing?.breakdown,
+    { tomografia3D, radiografias },
+    tomografiaPricing,
+    radiografiasPricing
+  );
+  // Total: si el técnico ya fijó finalPrice (contraoferta aceptada / precio final),
+  // ese valor manda; si no, se deriva del desglose unificado. suggestedPrice es
+  // histórico y se deja solo para el bloque "Historial de Precios".
+  const unifiedTotal =
+    typeof pricing?.finalPrice === 'number' && pricing.finalPrice > 0
+      ? pricing.finalPrice
+      : computeBreakdownTotal(unifiedBreakdown);
 
   // Verificar si el usuario puede enviar contraoferta
   // Para solicitudes internas: el técnico puede establecer precio aunque no exista uno previo
@@ -890,49 +920,42 @@ export const RequestDetailsModal = ({
         y += 5;
       }
 
-      // ========== DESGLOSE DE PRECIOS ==========
-      if (pricing && pricing.breakdown && pricing.breakdown.length > 0) {
+      // ========== DESGLOSE DE PRECIOS — usa unifiedBreakdown (fuente única) ==========
+      if (unifiedBreakdown.length > 0) {
         checkPageBreak(30);
         drawSectionHeader('DESGLOSE DE PRECIOS', [209, 250, 229]);
 
-        pricing.breakdown.forEach((item: any) => {
+        unifiedBreakdown.forEach((item) => {
           checkPageBreak(8);
-
-          // Soportar ambos formatos: { service, price } (DiagnosticPlanStep) y { itemName, subtotal, ... } (otros)
-          const displayName = item.itemName || item.service || 'Item';
-          const displayPrice = item.subtotal ?? item.price ?? 0;
+          const displayName = item.itemName;
+          const lineSubtotal = item.price * (item.quantity || 1);
           const displayQuantity = item.quantity || 1;
 
-          // Fondo de fila
           drawRoundedRect(margin + 2, y - 3, contentWidth - 4, 7, 1, [249, 250, 251]);
 
-          // Nombre del item
           pdf.setFontSize(8);
           pdf.setFont('helvetica', 'normal');
           pdf.setTextColor(...darkText);
           const itemText = displayQuantity > 1 ? `${displayName} (x${displayQuantity})` : displayName;
           pdf.text(itemText, margin + 5, y);
 
-          // Precio
           pdf.setFont('helvetica', 'bold');
-          pdf.text(`S/ ${displayPrice.toFixed(2)}`, pdfWidth - margin - 5, y, { align: 'right' });
+          pdf.text(`S/ ${lineSubtotal.toFixed(2)}`, pdfWidth - margin - 5, y, { align: 'right' });
           y += 8;
         });
 
-        // Línea de total
         y += 3;
         pdf.setDrawColor(...lightBorder);
         pdf.setLineWidth(0.5);
         pdf.line(margin, y, pdfWidth - margin, y);
         y += 6;
 
-        // Total
         drawRoundedRect(margin + 2, y - 4, contentWidth - 4, 10, 2, cyanLight);
         pdf.setFontSize(12);
         pdf.setFont('helvetica', 'bold');
         pdf.setTextColor(...white);
         pdf.text('TOTAL:', margin + 8, y + 2);
-        pdf.text(`S/ ${(pricing.finalPrice || pricing.suggestedPrice || 0).toFixed(2)}`, pdfWidth - margin - 8, y + 2, { align: 'right' });
+        pdf.text(`S/ ${unifiedTotal.toFixed(2)}`, pdfWidth - margin - 8, y + 2, { align: 'right' });
         y += 15;
       }
 
@@ -1111,13 +1134,13 @@ export const RequestDetailsModal = ({
                 {STUDY_STATUS[request.imagingStudy?.studyStatus as keyof typeof STUDY_STATUS]?.label || 'Pendiente'}
               </span>
 
-              {pricing && (
+              {(unifiedBreakdown.length > 0 || pricing) && (
                 <div className="px-4 py-2 rounded-xl bg-white/20 backdrop-blur-sm">
                   <div className="flex items-center gap-2">
                     <DollarSign className="w-5 h-5" />
                     <div>
                       <p className="text-[10px] font-medium text-white/70">Total</p>
-                      <p className="text-lg font-bold">S/ {(pricing.finalPrice || pricing.suggestedPrice || 0).toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                      <p className="text-lg font-bold">S/ {unifiedTotal.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     </div>
                   </div>
                 </div>
@@ -1276,8 +1299,8 @@ export const RequestDetailsModal = ({
             </div>
           )}
 
-          {/* DESGLOSE DE PRECIOS */}
-          {pricing && pricing.breakdown && pricing.breakdown.length > 0 && (
+          {/* DESGLOSE DE PRECIOS — fuente única: buildBreakdown() */}
+          {unifiedBreakdown.length > 0 && (
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
               <div className="px-4 py-3 bg-gradient-to-r from-emerald-50 to-green-50 border-b border-gray-200">
                 <div className="flex items-center justify-between">
@@ -1286,34 +1309,32 @@ export const RequestDetailsModal = ({
                     <span className="font-bold text-gray-800">Desglose de Precios</span>
                   </div>
                   <span className="text-xs font-medium text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full">
-                    {pricing.breakdown.length} items
+                    {unifiedBreakdown.length} items
                   </span>
                 </div>
               </div>
               <div className="p-3">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
-                  {pricing.breakdown.map((item: any, index) => {
-                    // Soportar ambos formatos: { service, price } (DiagnosticPlanStep) y { itemName, subtotal, ... } (otros)
-                    const displayName = item.itemName || item.service || 'Item';
-                    const displayPrice = item.subtotal ?? item.price ?? 0;
-                    const displayQuantity = item.quantity || 1;
-
+                  {unifiedBreakdown.map((item, index) => {
+                    const lineSubtotal = item.price * (item.quantity || 1);
                     return (
-                      <div key={index} className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg text-sm">
+                      <div key={`${item.category}-${item.itemKey}-${index}`} className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg text-sm">
                         <div className="flex items-center gap-2 min-w-0 flex-1">
                           <span className={`w-2 h-2 rounded-full flex-shrink-0 ${
                             item.category === 'tomografia3D' ? 'bg-panocef-primary' :
                             item.category === 'intraoral' ? 'bg-blue-500' :
                             item.category === 'extraoral' ? 'bg-panocef-accent' :
                             item.category === 'ortodoncias' ? 'bg-panocef-secondary' :
+                            item.category === 'analisis' ? 'bg-emerald-500' :
+                            item.category === 'fotografias' ? 'bg-amber-500' :
                             'bg-orange-500'
-                          }`}></span>
-                          <span className="text-gray-800 truncate">{displayName}</span>
-                          {displayQuantity > 1 && (
-                            <span className="text-gray-400 text-xs">x{displayQuantity}</span>
+                          }`} title={getBreakdownCategoryLabel(item.category)}></span>
+                          <span className="text-gray-800 truncate">{item.itemName}</span>
+                          {item.quantity > 1 && (
+                            <span className="text-gray-400 text-xs">x{item.quantity}</span>
                           )}
                         </div>
-                        <span className="font-semibold text-gray-900 flex-shrink-0 ml-2">S/ {displayPrice.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                        <span className="font-semibold text-gray-900 flex-shrink-0 ml-2">S/ {lineSubtotal.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                       </div>
                     );
                   })}
@@ -1321,7 +1342,7 @@ export const RequestDetailsModal = ({
                 <div className="flex items-center justify-between pt-3 border-t-2 border-gray-200">
                   <span className="text-lg font-bold text-gray-900">Total</span>
                   <span className={`text-2xl font-bold ${accentColor}`}>
-                    S/ {(pricing.finalPrice || pricing.suggestedPrice || 0).toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    S/ {unifiedTotal.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </span>
                 </div>
 
