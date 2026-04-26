@@ -47,8 +47,6 @@ export const RequestCard = ({
   const studyStatus = STUDY_STATUS[request.imagingStudy?.studyStatus as keyof typeof STUDY_STATUS];
   const StatusIcon = studyStatus?.icon || Clock;
   const appointmentDate = new Date(request.date);
-  const today = new Date();
-  const isOverdue = appointmentDate < today && request.imagingStudy?.studyStatus !== 'completed' && request.imagingStudy?.studyStatus !== 'delivered';
 
   return (
     <div className={`p-6 hover:bg-gray-50 transition-colors border-l-4 ${getPriorityColor(request.date)}`}>
@@ -64,18 +62,10 @@ export const RequestCard = ({
                 <h3 className="text-lg font-semibold text-gray-900">
                   {request.patientName}
                 </h3>
-                <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${studyType?.color || 'bg-gray-100'}`}>
-                  {studyType?.icon} {studyType?.label || 'Estudio'}
-                </span>
                 <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${studyStatus?.color}`}>
                   <StatusIcon className="w-3 h-3 mr-1" />
                   {studyStatus?.label}
                 </span>
-                {isOverdue && (
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                    ⚠️ Vencido
-                  </span>
-                )}
                 {request.radiographyData?.requestedDiscount && (
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-orange-100 text-orange-800 border-2 border-orange-300 shadow-sm">
                     💰 Solicitó Promoción

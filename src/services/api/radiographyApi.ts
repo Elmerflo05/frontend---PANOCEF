@@ -398,14 +398,18 @@ class RadiographyApiService {
   }
 
   /**
-   * Elimina una solicitud de radiografía
+   * Rechaza una solicitud de radiografía (acción del técnico).
+   * Acepta motivo opcional. La orden permanece visible con request_status='rejected_by_technician'.
    */
-  async deleteRadiographyRequest(requestId: number): Promise<ApiResponse> {
+  async deleteRadiographyRequest(requestId: number, reason?: string): Promise<ApiResponse> {
     try {
-      const response = await httpClient.delete(`/radiography/${requestId}`);
+      const response = await httpClient.delete(
+        `/radiography/${requestId}`,
+        reason ? { body: { reason } } : undefined
+      );
 
       if (!response.success) {
-        throw new Error(response.message || 'Error al eliminar solicitud de radiografía');
+        throw new Error(response.message || 'Error al rechazar solicitud de radiografía');
       }
 
       return response;

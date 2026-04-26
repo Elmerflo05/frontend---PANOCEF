@@ -51,9 +51,10 @@ const ImagingRequests = () => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [showViewResultsModal, setShowViewResultsModal] = useState(false);
   const [showPriceModal, setShowPriceModal] = useState(false);
-  // Objetivo de confirmación de eliminación (solicitudes 'pending' que el técnico descarta).
+  // Confirmación de rechazo (solicitudes 'pending' que el técnico descarta) con motivo opcional.
   const [deleteTarget, setDeleteTarget] = useState<ImagingRequestWithDetails | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [rejectionReason, setRejectionReason] = useState('');
 
   useEffect(() => {
     loadRequests();
@@ -272,16 +273,18 @@ const ImagingRequests = () => {
     }
     try {
       setIsDeleting(true);
-      await radiographyApi.deleteRadiographyRequest(requestId);
-      toast.success('Solicitud eliminada correctamente');
+      const trimmedReason = rejectionReason.trim();
+      await radiographyApi.deleteRadiographyRequest(requestId, trimmedReason || undefined);
+      toast.success('Solicitud rechazada correctamente');
       setDeleteTarget(null);
+      setRejectionReason('');
       await loadRequests();
     } catch (error: any) {
       const status = error?.response?.status || error?.status;
       if (status === 409) {
-        toast.error('No se puede eliminar: la solicitud ya no está pendiente');
+        toast.error('No se puede rechazar: la solicitud ya no está pendiente');
       } else {
-        toast.error(error?.message || 'Error al eliminar la solicitud');
+        toast.error(error?.message || 'Error al rechazar la solicitud');
       }
     } finally {
       setIsDeleting(false);
@@ -435,21 +438,26 @@ const ImagingRequests = () => {
         </div>
       </div>
 
-      {/* Confirmación de eliminación - solo se activa con deleteTarget (solicitud pending) */}
+      {/* Confirmación de rechazo (solicitudes 'pending') con motivo opcional */}
       {deleteTarget && (
         <div
           className="fixed inset-0 z-[9999] bg-black/60 flex items-center justify-center p-4"
-          onClick={() => !isDeleting && setDeleteTarget(null)}
+          onClick={() => {
+            if (!isDeleting) {
+              setDeleteTarget(null);
+              setRejectionReason('');
+            }
+          }}
         >
           <div
             className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6"
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              ¿Eliminar esta solicitud?
+              ¿Rechazar esta solicitud?
             </h3>
             <p className="text-sm text-gray-600 mb-4">
-              Se eliminará la solicitud del paciente{' '}
+              Se rechazará la solicitud del paciente{' '}
               <span className="font-medium">{deleteTarget.patientName || 'sin nombre'}</span>
               {' '}del{' '}
               <span className="font-medium">
@@ -459,14 +467,31 @@ const ImagingRequests = () => {
                   year: 'numeric'
                 })}
               </span>
-              . Esta acción no puede deshacerse.
+              . El doctor verá el motivo y podrá enviar una nueva solicitud.
+            </p>
+            <label className="block text-xs font-medium text-gray-700 mb-1">
+              Motivo (opcional, máx. 500 caracteres)
+            </label>
+            <textarea
+              value={rejectionReason}
+              onChange={(e) => setRejectionReason(e.target.value.slice(0, 500))}
+              placeholder="Ej. paciente no se presentó, datos incorrectos, etc."
+              rows={3}
+              disabled={isDeleting}
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent resize-none disabled:bg-gray-50"
+            />
+            <p className="text-[11px] text-gray-400 mt-1 mb-4 text-right">
+              {rejectionReason.length}/500
             </p>
             <p className="text-xs text-gray-500 mb-6">
-              Solo se pueden eliminar solicitudes en estado pendiente. Si ya empezaste a procesarla, no podrá eliminarse.
+              Solo se pueden rechazar solicitudes en estado pendiente. Si ya empezaste a procesarla, no podrá rechazarse.
             </p>
             <div className="flex justify-end gap-2">
               <button
-                onClick={() => setDeleteTarget(null)}
+                onClick={() => {
+                  setDeleteTarget(null);
+                  setRejectionReason('');
+                }}
                 disabled={isDeleting}
                 className="px-4 py-2 text-sm text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
               >
@@ -477,7 +502,7 @@ const ImagingRequests = () => {
                 disabled={isDeleting}
                 className="px-4 py-2 text-sm text-white bg-red-600 rounded-lg hover:bg-red-700 disabled:opacity-50"
               >
-                {isDeleting ? 'Eliminando…' : 'Eliminar'}
+                {isDeleting ? 'Rechazando…' : 'Rechazar'}
               </button>
             </div>
           </div>
